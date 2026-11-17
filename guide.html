@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f2efe9">
+<meta name="description" content="راهنمای کامل دریافت تسهیلات از اَبر وام">
+<title>راهنما | اَبر وام</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+
+<style>
+:root{
+  --bg:#f2efe9;
+  --surface:#fbfaf7;
+  --surface-2:#e9e3da;
+  --ink:#1c2025;
+  --ink-2:#42464b;
+  --muted:#77736e;
+  --line:#dcd5ca;
+  --wine:#542c35;
+  --wine-2:#713c45;
+  --rust:#bd593b;
+  --rust-light:#e18a61;
+  --cream:#e9d7c5;
+  --white:#fff;
+  --shadow:0 18px 50px rgba(34,29,26,.09);
+  --shadow-deep:0 28px 70px rgba(34,29,26,.18);
+  --max:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Vazirmatn,Tahoma,sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  padding-bottom:110px;
+}
+button,a{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+::selection{background:var(--wine);color:#fff}
+
+/* ───────── BACKGROUND ───────── */
+.site-bg{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  overflow:hidden;
+}
+.site-bg:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.34;
+  background-image:
+    linear-gradient(rgba(67,53,43,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(67,53,43,.045) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:linear-gradient(to bottom,#000,transparent 78%);
+}
+.site-bg:after{
+  content:"";
+  position:absolute;
+  width:750px;
+  height:750px;
+  top:-510px;
+  left:-250px;
+  border-radius:50%;
+  border:1px solid rgba(84,44,53,.10);
+  box-shadow:
+    0 0 0 45px rgba(84,44,53,.025),
+    0 0 0 100px rgba(84,44,53,.018),
+    0 0 0 165px rgba(84,44,53,.012);
+}
+.bg-glow{
+  position:absolute;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  filter:blur(90px);
+  opacity:.13;
+}
+.bg-glow.a{background:#c47a58;top:12%;right:-360px}
+.bg-glow.b{background:#81515b;top:62%;left:-390px}
+.bg-glow.c{background:#c47a58;top:85%;right:-300px;opacity:.09}
+.page-gridline{
+  position:fixed;
+  z-index:-1;
+  top:0;
+  bottom:0;
+  right:max(calc((100vw - var(--max))/2 - 35px),20px);
+  width:1px;
+  background:linear-gradient(transparent,rgba(84,44,53,.12),transparent);
+  pointer-events:none;
+}
+
+/* ───────── GLOBAL ───────── */
+.wrap{
+  width:min(calc(100% - 44px),var(--max));
+  margin-inline:auto;
+}
+.eyebrow{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  color:var(--rust);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.2px;
+}
+.eyebrow:before{
+  content:"";
+  width:27px;
+  height:2px;
+  background:var(--rust);
+}
+.section-kicker{
+  color:var(--rust);
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:1.5px;
+}
+.section-title{
+  font-size:clamp(25px,5vw,36px);
+  font-weight:950;
+  line-height:1.55;
+  letter-spacing:-1.1px;
+}
+.section-description{
+  color:var(--muted);
+  font-size:13px;
+  line-height:2.1;
+  font-weight:600;
+}
+
+/* ───────── HEADER ───────── */
+.header{
+  position:relative;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height:86px;
+  border-bottom:1px solid rgba(84,44,53,.14);
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.brand-symbol{
+  width:45px;
+  height:45px;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  background:var(--wine);
+  border-radius:12px 12px 3px 12px;
+  box-shadow:0 8px 18px rgba(84,44,53,.19);
+  position:relative;
+}
+.brand-symbol:before{
+  content:"";
+  position:absolute;
+  inset:5px;
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:8px 8px 2px 8px;
+}
+.brand-symbol svg{width:26px;height:26px}
+.brand-name{
+  font-size:22px;
+  line-height:1.2;
+  font-weight:1000;
+  letter-spacing:-1px;
+}
+.brand-caption{
+  font-size:9px;
+  color:var(--muted);
+  font-weight:750;
+  margin-top:4px;
+}
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+.header-links{
+  display:flex;
+  align-items:center;
+  gap:23px;
+}
+.header-links a{
+  color:#615a54;
+  font-size:11px;
+  font-weight:800;
+  transition:color .2s;
+}
+.header-links a:hover{color:var(--rust)}
+.header-action{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  border:1px solid rgba(84,44,53,.22);
+  padding:10px 14px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:900;
+  color:var(--wine);
+  transition:.25s;
+}
+.header-action:hover{
+  color:#fff;
+  background:var(--wine);
+  border-color:var(--wine);
+}
+.header-action svg{width:15px;height:15px}
+
+/* ───────── HERO ───────── */
+.hero{
+  position:relative;
+  padding:70px 0 55px;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:50px;
+  align-items:center;
+}
+.hero-copy{position:relative;z-index:2}
+.hero h1{
+  font-size:clamp(44px,6.4vw,78px);
+  font-weight:1000;
+  line-height:1.32;
+  letter-spacing:-3px;
+  margin-top:24px;
+}
+.hero h1 .line{
+  display:block;
+  overflow:hidden;
+  padding-bottom:4px;
+}
+.hero h1 .line span{display:inline-block}
+.hero h1 .accent{
+  color:var(--wine);
+  position:relative;
+}
+.hero h1 .accent:after{
+  content:"";
+  position:absolute;
+  right:0;
+  bottom:2px;
+  width:100%;
+  height:5px;
+  background:var(--rust);
+  transform:scaleX(0);
+  transform-origin:right;
+  animation:drawLine .8s 1.2s forwards;
+}
+@keyframes drawLine{to{transform:scaleX(1)}}
+.hero-text{
+  max-width:490px;
+  color:#716a63;
+  font-size:14px;
+  line-height:2.3;
+  font-weight:650;
+  margin-top:22px;
+}
+.hero-text strong{color:var(--wine);font-weight:950}
+.hero-actions{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+.primary-btn{
+  position:relative;
+  min-height:58px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:25px;
+  padding:0 22px;
+  color:white;
+  background:var(--wine);
+  border:1px solid var(--wine);
+  border-radius:8px 8px 2px 8px;
+  box-shadow:0 12px 25px rgba(84,44,53,.17);
+  font-size:13px;
+  font-weight:950;
+  overflow:hidden;
+  transition:transform .25s,box-shadow .25s,background .25s;
+}
+.primary-btn:before{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:-65%;
+  width:40%;
+  transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.23),transparent);
+  transition:right .7s;
+}
+.primary-btn:hover:before{right:120%}
+.primary-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 17px 30px rgba(84,44,53,.24);
+  background:#683843;
+}
+.primary-btn:active{transform:scale(.98)}
+.primary-btn svg{width:19px;height:19px}
+.text-link{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  color:var(--wine);
+  font-size:12px;
+  font-weight:900;
+  border-bottom:1px solid rgba(84,44,53,.3);
+  padding:8px 0;
+}
+.text-link svg{width:16px;height:16px;transition:transform .2s}
+.text-link:hover svg{transform:translateX(-4px)}
+
+/* ───────── HERO VISUAL (سند راهنما) ───────── */
+.hero-visual{
+  min-height:445px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.manual-frame{
+  position:relative;
+  width:min(100%,440px);
+  min-height:400px;
+  overflow:hidden;
+  border-radius:3px 30px 3px 30px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.08),transparent 45%),
+    linear-gradient(145deg,#633842,#3d242c);
+  box-shadow:var(--shadow-deep);
+  isolation:isolate;
+  transform-style:preserve-3d;
+}
+.manual-frame:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  opacity:.22;
+  background-image:
+    linear-gradient(rgba(255,255,255,.13) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.13) 1px,transparent 1px);
+  background-size:34px 34px;
+  mask-image:linear-gradient(135deg,#000,transparent 85%);
+}
+.manual-frame:after{
+  content:"";
+  position:absolute;
+  width:360px;
+  height:360px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:50%;
+  top:60px;
+  left:-125px;
+  box-shadow:
+    0 0 0 25px rgba(255,255,255,.035),
+    0 0 0 55px rgba(255,255,255,.025),
+    0 0 0 90px rgba(255,255,255,.018);
+}
+.manual-top{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:25px 25px 0;
+  color:rgba(255,255,255,.7);
+  font-size:10px;
+  font-weight:800;
+}
+.manual-top span:last-child{
+  direction:ltr;
+  letter-spacing:2px;
+  font-size:9px;
+}
+.manual-center{
+  position:relative;
+  z-index:2;
+  padding:42px 27px 0;
+}
+.manual-overline{
+  color:#e9c5ad;
+  font-size:11px;
+  font-weight:800;
+}
+.manual-title-big{
+  margin-top:12px;
+  color:#fff;
+  font-size:clamp(30px,5vw,44px);
+  font-weight:1000;
+  line-height:1.25;
+  letter-spacing:-1.5px;
+}
+.manual-subtitle{
+  margin-top:14px;
+  color:rgba(255,255,255,.7);
+  font-size:12px;
+  line-height:2;
+  font-weight:650;
+}
+.manual-separator{
+  height:1px;
+  background:rgba(255,255,255,.2);
+  margin:26px 0 20px;
+}
+.manual-numbers{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+.manual-num{
+  text-align:center;
+}
+.manual-num strong{
+  display:block;
+  color:#f0c5a2;
+  font-size:24px;
+  font-weight:1000;
+  direction:ltr;
+  letter-spacing:-1px;
+}
+.manual-num small{
+  display:block;
+  margin-top:5px;
+  color:rgba(255,255,255,.55);
+  font-size:9px;
+  font-weight:750;
+}
+.manual-bottom{
+  position:absolute;
+  z-index:3;
+  bottom:0;
+  right:0;
+  left:0;
+  min-height:54px;
+  padding:0 25px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(20,14,17,.22);
+  border-top:1px solid rgba(255,255,255,.13);
+  color:rgba(255,255,255,.7);
+  font-size:9px;
+  font-weight:800;
+}
+.manual-bottom b{
+  color:#f0c5a2;
+  direction:ltr;
+  letter-spacing:1px;
+}
+.manual-index{
+  position:absolute;
+  top:50%;
+  left:-24px;
+  transform:translateY(-50%) rotate(-90deg);
+  transform-origin:center;
+  color:#a48b7b;
+  font-size:9px;
+  letter-spacing:3px;
+  font-weight:900;
+}
+.manual-corner{
+  position:absolute;
+  width:75px;
+  height:75px;
+  top:-15px;
+  right:-15px;
+  border-top:1px solid var(--rust);
+  border-right:1px solid var(--rust);
+}
+.manual-orbit{
+  position:absolute;
+  width:18px;
+  height:18px;
+  top:80px;
+  left:20px;
+  border:1px solid rgba(255,255,255,.55);
+  transform:rotate(45deg);
+  animation:orbitTurn 18s linear infinite;
+}
+@keyframes orbitTurn{to{transform:rotate(405deg)}}
+.floating-chip{
+  position:absolute;
+  z-index:4;
+  bottom:38px;
+  right:-28px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:13px 16px;
+  background:var(--surface);
+  border:1px solid #e4dacf;
+  box-shadow:0 12px 30px rgba(31,25,22,.12);
+  border-radius:3px 10px 3px 10px;
+}
+.floating-chip-icon{
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  background:var(--rust);
+  border-radius:7px;
+}
+.floating-chip-icon svg{width:17px;height:17px}
+.floating-chip strong{
+  display:block;
+  font-size:11px;
+  font-weight:950;
+}
+.floating-chip small{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:700;
+}
+
+/* ───────── QUICK FACTS (زنده‌تر) ───────── */
+.quick-facts{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  margin:10px 0 70px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.fact-cell{
+  min-height:88px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:15px 20px;
+  position:relative;
+  transition:background .3s;
+}
+.fact-cell:hover{background:rgba(255,255,255,.4)}
+.fact-cell:not(:last-child):after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:22px;
+  bottom:22px;
+  width:1px;
+  background:var(--line);
+}
+.fact-icon{
+  width:38px;
+  height:38px;
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+  color:var(--wine);
+  background:#e8ded4;
+  border-radius:10px;
+  transition:transform .3s,background .3s,color .3s;
+}
+.fact-cell:hover .fact-icon{
+  transform:rotate(-6deg) scale(1.08);
+  background:var(--wine);
+  color:#fff;
+}
+.fact-icon svg{width:19px;height:19px}
+.fact-cell strong{
+  display:block;
+  font-size:11px;
+  font-weight:950;
+}
+.fact-cell small{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:700;
+  margin-top:4px;
+}
+
+/* ───────── FAQ SECTION ───────── */
+.faq-section{
+  padding:20px 0 80px;
+  position:relative;
+}
+.faq-header{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:35px;
+}
+.faq-header .section-title{margin-top:9px}
+.faq-side-note{
+  max-width:220px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:2.1;
+  font-weight:700;
+  padding-right:14px;
+  border-right:2px solid var(--rust);
+}
+.faq-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.faq-item{
+  background:var(--surface);
+  border:1px solid #e4ddd3;
+  border-radius:6px 20px 6px 20px;
+  overflow:hidden;
+  transition:border-color .3s,box-shadow .3s,background .3s;
+  position:relative;
+}
+.faq-item:before{
+  content:"";
+  position:absolute;
+  right:0;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:var(--line);
+  transition:background .35s;
+}
+.faq-item:hover{
+  border-color:#c9b6a5;
+  box-shadow:0 10px 25px rgba(48,37,29,.07);
+}
+.faq-item.open{
+  background:#fffdfa;
+  border-color:var(--wine);
+  box-shadow:0 15px 35px rgba(84,44,53,.12);
+}
+.faq-item.open:before{background:var(--rust)}
+.faq-question{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:22px 24px;
+  background:transparent;
+  border:0;
+  text-align:right;
+  color:var(--ink);
+  font-size:16px;
+  font-weight:900;
+  line-height:1.6;
+  cursor:pointer;
+  transition:color .2s;
+  font-family:inherit;
+}
+.faq-item.open .faq-question{color:var(--wine)}
+.faq-q-num{
+  flex-shrink:0;
+  color:var(--rust);
+  font-size:13px;
+  font-weight:950;
+  letter-spacing:1px;
+  direction:ltr;
+  font-feature-settings:"tnum";
+}
+.faq-q-text{
+  flex:1;
+}
+.faq-toggle{
+  flex-shrink:0;
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  background:#ece5db;
+  border-radius:10px;
+  color:var(--wine);
+  transition:transform .35s,background .3s,color .3s;
+  position:relative;
+}
+.faq-item.open .faq-toggle{
+  background:var(--wine);
+  color:#fff;
+  transform:rotate(180deg);
+}
+.faq-toggle svg{width:18px;height:18px}
+.faq-answer-wrap{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .45s cubic-bezier(.22,.8,.25,1);
+}
+.faq-item.open .faq-answer-wrap{
+  grid-template-rows:1fr;
+}
+.faq-answer-inner{
+  overflow:hidden;
+  min-height:0;
+}
+.faq-answer{
+  padding:0 24px 24px 24px;
+  color:#585349;
+  font-size:14px;
+  line-height:2.2;
+  font-weight:600;
+  border-top:1px dashed #e4ddd3;
+  padding-top:18px;
+  margin-top:2px;
+}
+.faq-answer strong{color:var(--wine);font-weight:950}
+.faq-answer em{
+  font-style:normal;
+  background:linear-gradient(180deg,transparent 62%,rgba(189,89,59,.28) 62%);
+  font-weight:800;
+  color:var(--ink);
+}
+
+/* ───────── CTA TO REQUEST PAGE ───────── */
+.cta-block{
+  margin:0 0 80px;
+  position:relative;
+  overflow:hidden;
+  background:var(--wine);
+  color:#fff;
+  border-radius:3px 30px 3px 30px;
+  padding:40px 35px;
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:30px;
+  align-items:center;
+  box-shadow:0 24px 50px rgba(84,44,53,.22);
+}
+.cta-block:before{
+  content:"";
+  position:absolute;
+  width:420px;
+  height:420px;
+  left:-160px;
+  top:-180px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:
+    0 0 0 25px rgba(255,255,255,.035),
+    0 0 0 60px rgba(255,255,255,.025),
+    0 0 0 110px rgba(255,255,255,.015);
+  pointer-events:none;
+}
+.cta-block:after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:4px;
+  height:100%;
+  background:var(--rust-light);
+}
+.cta-content{position:relative;z-index:2}
+.cta-kicker{
+  color:#e9c5ad;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2px;
+  margin-bottom:11px;
+}
+.cta-block h2{
+  font-size:clamp(24px,4vw,32px);
+  font-weight:1000;
+  line-height:1.5;
+  letter-spacing:-.8px;
+}
+.cta-block p{
+  margin-top:12px;
+  color:#e4cdd0;
+  font-size:12.5px;
+  line-height:2.1;
+  font-weight:650;
+  max-width:420px;
+}
+.cta-action{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+}
+.cta-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:16px;
+  padding:0 24px;
+  min-height:62px;
+  background:#fff;
+  color:var(--wine);
+  border:0;
+  border-radius:8px 8px 2px 8px;
+  font-size:14px;
+  font-weight:950;
+  text-decoration:none;
+  position:relative;
+  overflow:hidden;
+  transition:transform .25s,box-shadow .25s;
+  box-shadow:0 12px 25px rgba(0,0,0,.22);
+}
+.cta-btn:before{
+  content:"";
+  position:absolute;
+  top:0;bottom:0;right:-65%;
+  width:40%;
+  transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(84,44,53,.15),transparent);
+  transition:right .7s;
+}
+.cta-btn:hover:before{right:120%}
+.cta-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 17px 30px rgba(0,0,0,.32);
+}
+.cta-btn:active{transform:scale(.98)}
+.cta-btn svg{
+  width:19px;
+  height:19px;
+  transition:transform .25s;
+}
+.cta-btn:hover svg{transform:translateX(-5px)}
+.cta-deco{
+  position:absolute;
+  left:20px;
+  bottom:20px;
+  color:rgba(255,255,255,.08);
+  font-size:80px;
+  font-weight:1000;
+  line-height:1;
+  font-family:serif;
+  pointer-events:none;
+  z-index:1;
+}
+
+/* ───────── FOOTER ───────── */
+.footer{
+  padding:27px 0 20px;
+  border-top:1px solid var(--line);
+}
+.footer-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.footer-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.footer-brand-mark{
+  width:31px;
+  height:31px;
+  display:grid;
+  place-items:center;
+  color:white;
+  background:var(--wine);
+  border-radius:8px;
+}
+.footer-brand-mark svg{width:18px;height:18px}
+.footer-brand strong{font-size:13px;font-weight:950}
+.footer-brand small{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  margin-top:3px;
+}
+.footer-copy{
+  color:#93877c;
+  font-size:9px;
+  font-weight:700;
+}
+
+/* ───────── BOTTOM NAVIGATION ───────── */
+.bottom-nav-wrap{
+  position:fixed;
+  z-index:100;
+  bottom:calc(12px + env(safe-area-inset-bottom));
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:center;
+  padding:0 15px;
+  pointer-events:none;
+}
+.bottom-nav{
+  pointer-events:auto;
+  width:min(100%,570px);
+  min-height:76px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  align-items:center;
+  padding:7px;
+  background:rgba(31,30,31,.97);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:15px 15px 4px 15px;
+  box-shadow:0 17px 48px rgba(24,20,20,.28);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+.nav-item{
+  min-width:0;
+  min-height:61px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  position:relative;
+  border:0;
+  background:transparent;
+  color:#b9b1aa;
+  border-radius:10px;
+  transition:background .25s,color .25s,transform .25s;
+  text-decoration:none;
+}
+.nav-item svg{
+  width:23px;
+  height:23px;
+  stroke-width:1.8;
+  transition:transform .25s;
+}
+.nav-item span{
+  font-size:10px;
+  font-weight:850;
+  white-space:nowrap;
+}
+.nav-item:active{transform:scale(.94)}
+.nav-item.active{
+  color:#fff;
+  background:rgba(255,255,255,.10);
+}
+.nav-item.active:before{
+  content:"";
+  position:absolute;
+  top:0;
+  width:24px;
+  height:2px;
+  background:var(--rust-light);
+  border-radius:0 0 5px 5px;
+}
+.nav-item.active svg{
+  color:#e99a73;
+  transform:translateY(-2px);
+}
+.nav-item.action-nav{color:#f0b08a}
+.nav-item.action-nav svg{color:#e99a73}
+.nav-item.action-nav.active{background:rgba(189,89,59,.18)}
+
+/* ───────── REVEAL ───────── */
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ───────── RESPONSIVE ───────── */
+@media(min-width:900px){
+  body{padding-bottom:35px}
+  .bottom-nav-wrap{display:none}
+}
+@media(max-width:899px){
+  .wrap{width:min(calc(100% - 38px),650px)}
+  .header{min-height:76px}
+  .header-links{display:none}
+  .hero{
+    grid-template-columns:1fr;
+    gap:35px;
+    padding:54px 0 42px;
+  }
+  .hero-copy{max-width:620px}
+  .hero-visual{min-height:390px}
+  .manual-frame{max-width:470px}
+  .manual-index{left:-14px}
+  .floating-chip{right:-5px}
+  .quick-facts{margin-bottom:60px}
+}
+@media(max-width:600px){
+  .wrap{width:calc(100% - 34px)}
+  .header{min-height:72px}
+  .brand-symbol{width:41px;height:41px}
+  .brand-name{font-size:20px}
+  .header-action{padding:9px 10px;font-size:10px}
+  .hero{padding:43px 0 35px;gap:29px}
+  .hero h1{
+    font-size:clamp(39px,10.7vw,56px);
+    letter-spacing:-2px;
+    line-height:1.42;
+    margin-top:18px;
+  }
+  .hero-text{font-size:13px;line-height:2.2}
+  .hero-actions{gap:16px;margin-top:24px}
+  .primary-btn{min-height:55px;padding:0 17px;gap:17px;font-size:12px}
+  .hero-visual{min-height:365px}
+  .manual-frame{min-height:360px}
+  .manual-center{padding:38px 22px 0}
+  .manual-top{padding:21px 21px 0}
+  .manual-bottom{padding:0 21px}
+  .floating-chip{bottom:23px;right:-5px;padding:10px 12px}
+  .quick-facts{grid-template-columns:1fr 1fr;margin:0 0 55px}
+  .fact-cell{min-height:76px;padding:12px 12px}
+  .fact-cell:nth-child(2):after{display:none}
+  .fact-cell:nth-child(1),.fact-cell:nth-child(2){border-bottom:1px solid var(--line)}
+  .fact-icon{width:34px;height:34px}
+  .faq-header{flex-direction:column;align-items:flex-start;gap:10px}
+  .faq-side-note{max-width:100%}
+  .faq-question{padding:18px 18px;font-size:15px;gap:12px}
+  .faq-q-num{font-size:12px}
+  .faq-toggle{width:34px;height:34px}
+  .faq-answer{padding:0 18px 20px 18px;padding-top:16px;font-size:13.5px}
+  .cta-block{
+    grid-template-columns:1fr;
+    padding:32px 22px;
+    gap:22px;
+    margin-bottom:55px;
+  }
+  .cta-block h2{font-size:23px}
+  .cta-action{justify-content:flex-start}
+  .cta-btn{min-height:56px;padding:0 20px;font-size:13px;width:100%;justify-content:center}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:370px){
+  .wrap{width:calc(100% - 28px)}
+  .hero h1{font-size:37px}
+  .faq-question{font-size:14px;padding:16px 14px}
+  .faq-q-num{display:none}
+  .bottom-nav-wrap{padding:0 9px}
+  .bottom-nav{min-height:70px}
+  .nav-item{min-height:56px}
+  .nav-item span{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="site-bg">
+  <div class="bg-glow a"></div>
+  <div class="bg-glow b"></div>
+  <div class="bg-glow c"></div>
+</div>
+<div class="page-gridline"></div>
+
+<!-- HEADER -->
+<header class="header wrap">
+  <a class="brand" href="index.html" aria-label="اَبر وام، صفحه اصلی">
+    <div class="brand-symbol">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 16.5h16"/>
+        <path d="M6 16.5a5.5 5.5 0 0 1 10.7-1.5A3.5 3.5 0 1 1 18 16.5"/>
+        <path d="M9 10.5l3-3 3 3"/>
+        <path d="M12 7.5v7"/>
+      </svg>
+    </div>
+    <div>
+      <div class="brand-name">اَبر وام</div>
+      <div class="brand-caption">راهکار هوشمند بررسی تسهیلات</div>
+    </div>
+  </a>
+
+  <div class="header-right">
+    <nav class="header-links" aria-label="پیوندهای اصلی">
+      <a href="index.html">صفحه اصلی</a>
+      <a href="guide.html">راهنمای دریافت</a>
+      <a href="#faq">سؤالات متداول</a>
+    </nav>
+    <a class="header-action" href="activation.html">
+      <span>ورود به درخواست</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M13 6l6 6-6 6"/>
+      </svg>
+    </a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero wrap">
+  <div class="hero-copy">
+    <div class="eyebrow">راهنمای جامع سامانه</div>
+
+    <h1>
+      <span class="line"><span>قبل از هر قدم،</span></span>
+      <span class="line"><span class="accent">با مسیر</span> آشنا شو.</span>
+    </h1>
+
+    <p class="hero-text">
+      این راهنما همه‌چیزی است که برای شروع درخواست در <strong>اَبر وام</strong> نیاز داری.
+      از شرایط اولیه تا جزئیات بررسی و تکمیل پرونده — همه در یک صفحه.
+    </p>
+
+    <div class="hero-actions">
+      <a class="primary-btn" href="#faq">
+        <span>مشاهده سؤالات متداول</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </a>
+      <a class="text-link" href="activation.html">
+        رفتن به درخواست
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="manual-index">ABR VAM / GUIDE</div>
+    <div class="manual-frame" id="manualFrame">
+      <div class="manual-top">
+        <span>سند راهنما</span>
+        <span>DOC / 002</span>
+      </div>
+
+      <div class="manual-center">
+        <div class="manual-overline">در یک نگاه</div>
+        <div class="manual-title-big">راهنمای<br>دریافت تسهیلات</div>
+        <div class="manual-subtitle">
+          هر آنچه برای شروعی مطمئن نیاز داری، در این صفحه جمع شده است.
+        </div>
+
+        <div class="manual-separator"></div>
+
+        <div class="manual-numbers">
+          <div class="manual-num">
+            <strong>۱۵</strong>
+            <small>سؤال پاسخ داده</small>
+          </div>
+          <div class="manual-num">
+            <strong>۴</strong>
+            <small>مرحله اصلی</small>
+          </div>
+          <div class="manual-num">
+            <strong>۰۱</strong>
+            <small>مسیر روشن</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="manual-bottom">
+        <span>مسیر بررسی درخواست</span>
+        <b>READY TO START</b>
+      </div>
+      <div class="manual-orbit"></div>
+      <div class="manual-corner"></div>
+    </div>
+
+    <div class="floating-chip">
+      <div class="floating-chip-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 8v4l3 2"/>
+        </svg>
+      </div>
+      <div>
+        <strong>مطالعه کوتاه</strong>
+        <small>حدود ۵ دقیقه</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK FACTS -->
+<section class="quick-facts wrap" aria-label="نکات کلیدی">
+  <div class="fact-cell">
+    <div class="fact-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+      </svg>
+    </div>
+    <div>
+      <strong>بدون هزینه اولیه</strong>
+      <small>شروع ثبت رایگان است</small>
+    </div>
+  </div>
+
+  <div class="fact-cell">
+    <div class="fact-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="5" width="18" height="15" rx="2"/>
+        <path d="M3 10h18M7 2v3m10-3v3"/>
+      </svg>
+    </div>
+    <div>
+      <strong>ثبت کاملاً آنلاین</strong>
+      <small>بدون مراجعه حضوری</small>
+    </div>
+  </div>
+
+  <div class="fact-cell">
+    <div class="fact-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3l2.2 2.1 3-.2.8 2.9 2.5 1.7-1.1 2.8 1.1 2.8-2.5 1.7-.8 2.9-3-.2L12 22l-2.2-2.1-3 .2-.8-2.9-2.5-1.7 1.1-2.8-1.1-2.8L6 8.2l.8-2.9 3 .2L12 3z"/>
+        <path d="M8.5 12.3l2.2 2.2 4.8-5"/>
+      </svg>
+    </div>
+    <div>
+      <strong>بررسی شفاف</strong>
+      <small>معیارهای مشخص</small>
+    </div>
+  </div>
+
+  <div class="fact-cell">
+    <div class="fact-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19V5m0 14h16"/>
+        <path d="M7 15l4-4 3 2 5-6"/>
+        <path d="M15 7h4v4"/>
+      </svg>
+    </div>
+    <div>
+      <strong>پیگیری مرحله‌ای</strong>
+      <small>در هر مرحله مطلع می‌شوی</small>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section wrap reveal" id="faq">
+  <div class="faq-header">
+    <div>
+      <div class="section-kicker">FREQUENTLY ASKED / 01</div>
+      <h2 class="section-title">سؤالات پرتکرار<br>درباره اَبر وام</h2>
+    </div>
+    <p class="faq-side-note">
+      پاسخ شفاف به پرتکرارترین پرسش‌ها. اگر پاسخ سوالت را پیدا نکردی، با پشتیبانی تماس بگیر.
+    </p>
+  </div>
+
+  <div class="faq-list" id="faqList">
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">01</span>
+        <span class="faq-q-text">اَبر وام دقیقاً چه کاری انجام می‌دهد؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            <strong>اَبر وام</strong> یک سامانه آنلاین بررسی تسهیلات است که به شما کمک می‌کند درخواست خود را در بستری منظم ثبت کنید. ما <em>فرآیند بررسی</em> را ساده و شفاف کرده‌ایم تا در کوتاه‌ترین زمان ممکن، وضعیت درخواستت مشخص شود.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">02</span>
+        <span class="faq-q-text">برای ثبت درخواست چه مدارکی لازم است؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            به‌طور کلی به <strong>کارت ملی</strong>، <strong>شماره تماس فعال</strong> و <em>اطلاعات پایه هویتی</em> نیاز داری. بسته به نوع تسهیلات، ممکن است مدارک تکمیلی درخواست شود که در همان مرحله به شما اطلاع داده می‌شود.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">03</span>
+        <span class="faq-q-text">آیا برای دریافت وام باید ضامن داشته باشم؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            در برخی طرح‌ها <strong>بدون ضامن</strong> و بر اساس اعتبارسنجی هوشمند عمل می‌شود. در طرح‌های دیگر ممکن است نیاز به ضامن یا وثیقه باشد. این مورد <em>در زمان بررسی پرونده</em> به شما اعلام خواهد شد.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">04</span>
+        <span class="faq-q-text">فرآیند بررسی چقدر زمان می‌برد؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            <strong>بررسی اولیه</strong> معمولاً در کمتر از یک روز کاری انجام می‌شود. زمان نهایی به کامل بودن اطلاعات و نوع تسهیلات بستگی دارد و از طریق <em>پنل کاربری</em> به اطلاع شما می‌رسد.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">05</span>
+        <span class="faq-q-text">حداکثر مبلغ قابل دریافت چقدر است؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            سقف اعلام‌شده تا <strong>۵۰ میلیون تومان</strong> است، اما مبلغ نهایی پس از بررسی <em>شرایط فردی</em>، اعتبارسنجی و طرح انتخابی مشخص می‌شود. این مبلغ می‌تواند کمتر از سقف باشد.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">06</span>
+        <span class="faq-q-text">آیا ثبت درخواست هزینه‌ای دارد؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            <strong>ثبت درخواست کاملاً رایگان</strong> است. هیچ مبلغی بابت شروع یا بررسی اولیه دریافت نمی‌شود. هزینه‌های احتمالی بعدی (در صورت وجود) به‌صورت <em>شفاف و کتبی</em> اعلام می‌گردد.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">07</span>
+        <span class="faq-q-text">چه کسانی واجد شرایط دریافت هستند؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            افراد <strong>بالای ۱۸ سال</strong> با <em>کارت ملی معتبر</em> و شماره تماس به نام خود می‌توانند درخواست ثبت کنند. شرایط تکمیلی شامل سن، سابقه و اعتبارسنجی است که در فرآیند بررسی لحاظ می‌شود.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">08</span>
+        <span class="faq-q-text">چطور می‌توانم وضعیت درخواستم را پیگیری کنم؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            پس از ثبت درخواست، از طریق <strong>پنل کاربری</strong> می‌توانی وضعیت را در هر لحظه مشاهده کنی. تمام تغییرات و به‌روزرسانی‌ها از طریق <em>پیامک و اعلان</em> هم به شما اطلاع داده می‌شود.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">09</span>
+        <span class="faq-q-text">اگر درخواستم رد شود چه اتفاقی می‌افتد؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            در صورت رد درخواست، <strong>دلیل رد</strong> به شما اعلام می‌شود. در بسیاری از موارد می‌توان پس از رفع مشکل، <em>مجدداً درخواست ثبت کرد</em>. تیم پشتیبانی هم برای راهنمایی در دسترس است.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">10</span>
+        <span class="faq-q-text">اطلاعات من چقدر امن است؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            اطلاعات شما با <strong>پروتکل‌های رمزنگاری مدرن</strong> ذخیره و منتقل می‌شود. دسترسی به داده‌ها فقط توسط <em>تیم مجاز</em> و طبق سیاست‌های حریم خصوصی انجام می‌گیرد.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">11</span>
+        <span class="faq-q-text">بازپرداخت اقساط چگونه محاسبه می‌شود؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            اقساط بر اساس <strong>مبلغ نهایی تسهیلات</strong>، مدت بازپرداخت و نرخ سود مشخص محاسبه می‌شود. جدول دقیق اقساط در <em>صفحه اقساط</em> سامانه برای شما نمایش داده می‌شود.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">12</span>
+        <span class="faq-q-text">آیا می‌توانم درخواستم را لغو کنم؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            بله، تا <strong>قبل از تأیید نهایی</strong> می‌توانی از پنل کاربری درخواستت را لغو کنی. پس از تأیید نهایی، لغو منوط به <em>شرایط قرارداد</em> خواهد بود.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">13</span>
+        <span class="faq-q-text">چه مدت پس از تأیید، واریز انجام می‌شود؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            پس از تأیید نهایی و امضای قرارداد، واریز معمولاً در <strong>کمتر از ۴۸ ساعت کاری</strong> انجام می‌شود. زمان دقیق به <em>بانک عامل</em> بستگی دارد.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">14</span>
+        <span class="faq-q-text">آیا امکان افزایش سقف تسهیلات وجود دارد؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            در صورتی که <strong>سابقه بازپرداخت مثبت</strong> داشته باشی و شرایط اعتبارسنجی اجازه دهد، امکان افزایش تدریجی سقف وجود دارد. این موضوع <em>در هر مقطع زمانی</em> قابل بررسی است.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        <span class="faq-q-num">15</span>
+        <span class="faq-q-text">در صورت بروز مشکل چطور با پشتیبانی تماس بگیرم؟</span>
+        <span class="faq-toggle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </span>
+      </button>
+      <div class="faq-answer-wrap">
+        <div class="faq-answer-inner">
+          <div class="faq-answer">
+            تیم پشتیبانی از طریق <strong>چت آنلاین سامانه</strong>، <em>تلفن</em> و <em>ایمیل</em> پاسخگوست. ساعات کاری معمولاً ۹ صبح تا ۶ عصر است و برای موارد فوری در همان روز پیگیری می‌شود.
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- CTA BLOCK -->
+<section class="wrap reveal">
+  <div class="cta-block">
+    <div class="cta-content">
+      <div class="cta-kicker">READY / NEXT STEP</div>
+      <h2>حالا که همه‌چیز روشنه،<br>شروع کن.</h2>
+      <p>
+        اطلاعاتت را ثبت کن و مسیر بررسی درخواستت را در سامانه اَبر وام آغاز کن.
+        فرآیند کوتاه، شفاف و کاملاً آنلاین.
+      </p>
+    </div>
+    <div class="cta-action">
+      <a class="cta-btn" href="activation.html">
+        <span>شروع درخواست</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+    <div class="cta-deco">→</div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer wrap">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 16.5h16"/>
+          <path d="M6 16.5a5.5 5.5 0 0 1 10.7-1.5A3.5 3.5 0 1 1 18 16.5"/>
+          <path d="M9 10.5l3-3 3 3M12 7.5v7"/>
+        </svg>
+      </div>
+      <div>
+        <strong>اَبر وام</strong>
+        <small>راهکار هوشمند بررسی تسهیلات</small>
+      </div>
+    </div>
+    <div class="footer-copy">© تمامی حقوق این سامانه محفوظ است.</div>
+  </div>
+</footer>
+
+<!-- BOTTOM NAVIGATION -->
+<div class="bottom-nav-wrap">
+  <nav class="bottom-nav" aria-label="ناوبری اصلی">
+
+    <a class="nav-item" href="index.html" data-nav="home" aria-label="خانه">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m3 10 9-7 9 7"/>
+        <path d="M5 9v11h14V9M9 20v-7h6v7"/>
+      </svg>
+      <span>خانه</span>
+    </a>
+
+    <a class="nav-item active" href="guide.html" data-nav="guide" aria-label="راهنما">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v17H7.5A2.5 2.5 0 0 0 5 21.5z"/>
+        <path d="M5 4.5v17M9 7h7M9 11h7"/>
+      </svg>
+      <span>راهنما</span>
+    </a>
+
+    <a class="nav-item action-nav" href="activation.html" data-nav="request" aria-label="ثبت درخواست">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3v18M3 12h18"/>
+        <circle cx="12" cy="12" r="9"/>
+      </svg>
+      <span>درخواست</span>
+    </a>
+
+    <a class="nav-item" href="installments.html" data-nav="installments" aria-label="اقساط">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="5" width="18" height="15" rx="2"/>
+        <path d="M3 10h18M8 15h3m4 0h2"/>
+        <path d="M7 2v3m10-3v3"/>
+      </svg>
+      <span>اقساط</span>
+    </a>
+
+  </nav>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  const ROUTES = {
+    home: "index.html",
+    guide: "guide.html",
+    request: "activation.html",
+    installments: "installments.html"
+  };
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // هماهنگ‌سازی مسیرها
+  document.querySelectorAll("[data-nav]").forEach(link => {
+    const key = link.dataset.nav;
+    if (ROUTES[key]) link.href = ROUTES[key];
+  });
+
+  // ───── انیمیشن ورود ─────
+  if (window.gsap && !reducedMotion) {
+    const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    intro
+      .from(".brand", { y: -16, opacity: 0, duration: .65 })
+      .from(".hero-copy .eyebrow", { y: 15, opacity: 0, duration: .55 }, "-=.25")
+      .from(".hero h1 .line span", { y: 48, opacity: 0, duration: .85, stagger: .13 }, "-=.15")
+      .from(".hero-text", { y: 18, opacity: 0, duration: .65 }, "-=.4")
+      .from(".hero-actions", { y: 15, opacity: 0, duration: .55 }, "-=.35")
+      .from(".manual-frame", { y: 25, opacity: 0, scale: .97, duration: .9 }, "-=.75")
+      .from(".floating-chip", { x: -15, opacity: 0, duration: .5 }, "-=.4");
+
+    // ورود آیتم‌های FAQ
+    gsap.from(".faq-item", {
+      y: 30,
+      opacity: 0,
+      duration: .55,
+      stagger: .06,
+      delay: 1.2,
+      ease: "power2.out",
+      scrollTrigger: null
+    });
+  }
+
+  // ───── Reveal ─────
+  const revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: .1, rootMargin: "0px 0px -35px 0px" });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add("visible"));
+  }
+
+  // ───── اکاردئون (بدون پرش صفحه) ─────
+  const faqItems = document.querySelectorAll(".faq-item");
+  faqItems.forEach(item => {
+    const btn = item.querySelector(".faq-question");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const isOpen = item.classList.contains("open");
+      
+      // بستن همه (اختیاری - برای تجربه تمیزتر)
+      faqItems.forEach(other => {
+        if (other !== item) {
+          other.classList.remove("open");
+          const otherBtn = other.querySelector(".faq-question");
+          if (otherBtn) otherBtn.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      // باز/بسته کردن آیتم جاری
+      if (isOpen) {
+        item.classList.remove("open");
+        btn.setAttribute("aria-expanded", "false");
+      } else {
+        item.classList.add("open");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  // ───── تیلت ملایم روی سند راهنما (فقط دسکتاپ) ─────
+  const frame = document.getElementById("manualFrame");
+  const canHover = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+  if (frame && canHover && !reducedMotion) {
+    frame.addEventListener("pointermove", e => {
+      const r = frame.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5;
+      const y = (e.clientY - r.top) / r.height - .5;
+      frame.style.transform = `perspective(1000px) rotateY(${x * -2.5}deg) rotateX(${y * 2.5}deg)`;
+    });
+    frame.addEventListener("pointerleave", () => {
+      frame.style.transform = "perspective(1000px) rotateY(0) rotateX(0)";
+    });
+  }
+
+  // ───── فیدبک لمسی ─────
+  document.querySelectorAll(".primary-btn,.header-action,.nav-item,.cta-btn,.faq-question").forEach(el => {
+    el.addEventListener("pointerdown", () => {
+      if (!reducedMotion && window.gsap) {
+        gsap.to(el, { scale: .97, duration: .12, overwrite: true });
+      }
+    });
+    el.addEventListener("pointerup", () => {
+      if (!reducedMotion && window.gsap) {
+        gsap.to(el, { scale: 1, duration: .25, ease: "back.out(2)", overwrite: true });
+      }
+    });
+    el.addEventListener("pointercancel", () => {
+      if (!reducedMotion && window.gsap) {
+        gsap.to(el, { scale: 1, duration: .2 });
+      }
+    });
+  });
+
+})();
+</script>
+
+</body>
+          </html>
