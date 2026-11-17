@@ -1,865 +1,706 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>وام فوری | اَبر وام</title>
-  <!-- فونت‌های درشت و خاص فارسی -->
-  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
-  <!-- کتابخانه انیمیشن قدرتمند Anime.js -->
-  <script src="https://cdn.jsdelivr.net/npm/animejs@4.3.5/lib/anime.iife.min.js"></script>
-  <style>
-    /* ===== RESET & VARIABLES ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#f8f5ee">
+<title>ابر وام | تجربه مالی متفاوت</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
 
-    :root {
-      /* پالت رنگی غیر تکراری، روشن و زنده (بدون تم شب) */
-      --bg-base: #fef9f0;
-      --bg-mesh-1: #ffb347;
-      --bg-mesh-2: #ff6b9d;
-      --bg-mesh-3: #4ecdc4;
-      --bg-mesh-4: #a06cd5;
-      
-      --ink-strong: #1a1a2e;
-      --ink-soft: #2d2d44;
-      
-      /* رنگ‌های برند برای کلمات کلیدی */
-      --brand-spark: #ff4757;
-      --brand-gold: #ffa502;
-      --brand-mint: #2ed573;
-      --brand-violet: #9b59b6;
+<style>
+:root{
+ --bg:#f8f5ee;
+ --ink:#20251f;
+ --muted:#85867d;
+ --orange:#f07837;
+ --orange2:#ffae68;
+ --green:#315c4b;
+ --mint:#b9d9bd;
+ --pink:#eaa9a0;
+ --line:rgba(40,48,39,.09);
+ --white:#fffefa;
+ --shadow:0 18px 55px rgba(58,48,32,.09);
+ --nav:76px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+ font-family:Vazirmatn,sans-serif;
+ background:var(--bg);
+ color:var(--ink);
+ min-height:100vh;
+ padding-bottom:calc(var(--nav) + 28px + env(safe-area-inset-bottom));
+ overflow-x:hidden;
+}
+button,a{font-family:inherit}
+button{cursor:pointer}
 
-      /* سایه‌های برجسته و نامتقارن */
-      --shadow-3d: 12px 12px 0 rgba(0, 0, 0, 0.08), 0 4px 15px rgba(0, 0, 0, 0.05);
-      --shadow-float: 0 20px 40px -10px rgba(255, 71, 87, 0.3);
-      
-      /* گوشه‌های تیز و گرد ترکیبی */
-      --radius-blob: 40% 60% 70% 30% / 40% 50% 60% 50%;
-    }
+/* ATMOSPHERE */
+.ambient{
+ position:fixed;inset:0;pointer-events:none;z-index:-3;overflow:hidden;
+ background:
+ radial-gradient(ellipse at 90% 5%,rgba(255,172,112,.20),transparent 34%),
+ radial-gradient(ellipse at 5% 40%,rgba(161,201,171,.18),transparent 38%),
+ radial-gradient(ellipse at 80% 85%,rgba(231,176,162,.17),transparent 34%);
+}
+.ambient:before,.ambient:after{
+ content:"";position:absolute;border-radius:50%;filter:blur(65px);
+ animation:orb 18s ease-in-out infinite alternate;
+}
+.ambient:before{
+ width:260px;height:260px;right:-130px;top:190px;
+ background:rgba(255,156,90,.14);
+}
+.ambient:after{
+ width:220px;height:220px;left:-130px;top:55%;
+ background:rgba(100,162,132,.15);
+ animation-delay:-8s;
+}
+@keyframes orb{
+ from{transform:translate3d(0,0,0) scale(.9)}
+ to{transform:translate3d(30px,-55px,0) scale(1.18)}
+}
+#particles{
+ position:fixed;inset:0;width:100%;height:100%;
+ pointer-events:none;z-index:-1;opacity:.43
+}
 
-    body {
-      font-family: 'Vazirmatn', sans-serif;
-      background: var(--bg-base);
-      color: var(--ink-strong);
-      min-height: 100vh;
-      overflow-x: hidden;
-      padding-bottom: 90px; /* فضای ناوبری پایین */
-      position: relative;
-      font-weight: 500;
-    }
+/* GLOBAL */
+.container{width:min(100% - 38px,520px);margin:auto}
+.eyebrow{
+ display:flex;align-items:center;gap:9px;
+ font-size:12px;font-weight:800;letter-spacing:.5px;color:var(--muted)
+}
+.live-dot{
+ width:8px;height:8px;border-radius:50%;
+ background:#53a77b;box-shadow:0 0 0 5px rgba(83,167,123,.12);
+ animation:live 2s infinite
+}
+@keyframes live{50%{box-shadow:0 0 0 9px rgba(83,167,123,0)}}
 
-    /* ===== پس‌زمینه مِش متحرک (الهام از Mesh Gradient) ===== */
-    .bg-canvas {
-      position: fixed;
-      inset: -20%;
-      z-index: -2;
-      background: 
-        radial-gradient(circle at 20% 30%, var(--bg-mesh-1) 0%, transparent 40%),
-        radial-gradient(circle at 80% 70%, var(--bg-mesh-2) 0%, transparent 45%),
-        radial-gradient(circle at 40% 80%, var(--bg-mesh-3) 0%, transparent 40%),
-        radial-gradient(circle at 70% 20%, var(--bg-mesh-4) 0%, transparent 35%);
-      filter: blur(50px);
-      opacity: 0.6;
-      animation: meshMove 20s ease-in-out infinite alternate;
-    }
+/* HEADER */
+.header{
+ padding:25px 0 18px;
+ display:flex;align-items:center;justify-content:space-between
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{
+ width:45px;height:45px;border-radius:15px 15px 15px 5px;
+ background:linear-gradient(145deg,#f9a05c,#e96c37);
+ display:grid;place-items:center;color:white;font-size:25px;
+ box-shadow:0 8px 20px rgba(224,112,55,.23);
+ transform:rotate(-5deg);
+ position:relative
+}
+.brand-mark:after{
+ content:"";position:absolute;inset:4px;
+ border:1px solid rgba(255,255,255,.4);border-radius:11px
+}
+.brand-name{font-size:23px;font-weight:1000;letter-spacing:-1px}
+.brand-caption{font-size:10px;color:var(--muted);font-weight:700}
+.header-action{
+ display:flex;align-items:center;gap:7px;
+ background:rgba(255,255,255,.65);
+ border:1px solid rgba(255,255,255,.9);
+ border-radius:30px;padding:10px 13px;
+ font-size:12px;font-weight:900;color:var(--green);
+ box-shadow:0 5px 18px rgba(30,40,30,.04)
+}
+.header-action i{
+ width:7px;height:7px;background:#60aa7d;border-radius:50%
+}
 
-    @keyframes meshMove {
-      0% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.1) rotate(3deg); }
-      100% { transform: scale(1.05) rotate(-2deg); }
-    }
+/* HERO */
+.hero{padding:26px 0 12px;position:relative}
+.hero-kicker{
+ display:inline-flex;align-items:center;gap:7px;
+ color:var(--orange);font-size:13px;font-weight:900;
+ background:rgba(240,120,55,.09);
+ padding:8px 13px;border-radius:8px 20px 20px 20px;
+ margin-bottom:19px
+}
+.hero h1{
+ font-size:clamp(39px,10vw,53px);
+ line-height:1.35;font-weight:1000;
+ letter-spacing:-2px;
+}
+.hero h1 .line{display:block}
+.gradient-text{
+ color:var(--orange);
+ background:linear-gradient(100deg,#db6534,#ffad60,#dc6d40);
+ background-size:200% auto;
+ -webkit-background-clip:text;background-clip:text;
+ -webkit-text-fill-color:transparent;
+ animation:textFlow 5s linear infinite
+}
+@keyframes textFlow{to{background-position:200% center}}
+.hero-highlight{
+ position:relative;display:inline-block;z-index:1
+}
+.hero-highlight:after{
+ content:"";position:absolute;bottom:5px;right:0;left:0;
+ height:10px;background:#c6ddc3;z-index:-1;
+ border-radius:20px;transform:rotate(-1.5deg);
+ animation:underline 1.2s cubic-bezier(.2,.8,.2,1) both
+}
+@keyframes underline{from{transform:scaleX(0);transform-origin:right}to{transform:scaleX(1)}}
+.hero-description{
+ font-size:15px;line-height:2.1;color:#73766e;
+ font-weight:600;margin-top:18px;max-width:410px
+}
+.hero-description strong{color:var(--green);font-weight:1000}
+.hero-bottom{
+ display:flex;align-items:center;justify-content:space-between;
+ margin-top:20px
+}
+.trust-mini{display:flex;align-items:center;gap:8px}
+.avatar-stack{display:flex;direction:ltr}
+.avatar-stack span{
+ width:28px;height:28px;border-radius:50%;border:2px solid var(--bg);
+ margin-left:-8px;display:grid;place-items:center;
+ font-size:13px;background:#e8d5c4
+}
+.avatar-stack span:nth-child(2){background:#d3e4d4}
+.avatar-stack span:nth-child(3){background:#f1c5ac}
+.trust-mini small{font-size:10px;color:var(--muted);font-weight:800}
+.hero-stamp{
+ width:64px;height:64px;border:1px dashed #d9b18f;
+ border-radius:50%;display:grid;place-items:center;
+ color:var(--orange);font-size:11px;font-weight:1000;
+ text-align:center;line-height:1.5;transform:rotate(10deg);
+ animation:stamp 7s linear infinite
+}
+@keyframes stamp{to{transform:rotate(370deg)}}
 
-    /* ذرات شناور (Canvas Particles) */
-    #particle-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      opacity: 0.4;
-    }
+/* FEATURE CARD */
+.feature-card{
+ margin-top:25px;position:relative;overflow:hidden;
+ padding:25px 22px 22px;
+ background:linear-gradient(135deg,#263f35 0%,#315b49 55%,#426d55 100%);
+ color:white;border-radius:29px 29px 8px 29px;
+ box-shadow:0 23px 50px rgba(41,76,57,.19);
+ isolation:isolate;
+}
+.feature-card:before{
+ content:"";position:absolute;inset:0;z-index:-1;
+ background:
+ radial-gradient(circle at 90% 10%,rgba(255,188,119,.28),transparent 34%),
+ radial-gradient(circle at 5% 100%,rgba(143,207,166,.18),transparent 40%)
+}
+.feature-card:after{
+ content:"";position:absolute;width:230px;height:230px;
+ border:1px solid rgba(255,255,255,.10);
+ border-radius:50%;left:-100px;top:-125px;
+ box-shadow:0 0 0 25px rgba(255,255,255,.025),
+ 0 0 0 55px rgba(255,255,255,.02);
+ animation:rotateRing 35s linear infinite
+}
+@keyframes rotateRing{to{transform:rotate(360deg)}}
+.card-top{
+ display:flex;justify-content:space-between;align-items:center;
+ position:relative;z-index:2
+}
+.card-label{
+ display:flex;align-items:center;gap:8px;
+ font-size:13px;font-weight:800;color:#d8e5d8
+}
+.card-label b{
+ width:8px;height:8px;border-radius:50%;
+ background:#9ad6a7;box-shadow:0 0 12px #9ad6a7
+}
+.card-index{font-size:11px;color:#c4d7c8;letter-spacing:2px}
+.amount-area{margin-top:31px;position:relative;z-index:2}
+.amount-caption{font-size:13px;color:#c2d3c5;font-weight:700}
+.amount{
+ display:flex;align-items:baseline;gap:9px;margin-top:5px;
+ direction:rtl;flex-wrap:wrap
+}
+.amount strong{
+ font-size:clamp(39px,11vw,55px);
+ font-weight:1000;letter-spacing:-2px;line-height:1.4;
+ font-variant-numeric:tabular-nums;
+ color:#fff
+}
+.amount span{font-size:15px;font-weight:800;color:#c7d8ca}
+.amount-note{
+ display:flex;align-items:center;gap:8px;
+ margin-top:8px;color:#d1e1d3;font-size:12px;font-weight:700
+}
+.amount-note span{
+ padding:4px 9px;background:rgba(255,255,255,.12);
+ border-radius:20px;color:#f9c58c
+}
+.card-divider{
+ border:0;border-top:1px solid rgba(255,255,255,.15);
+ margin:24px 0 18px;position:relative;z-index:2
+}
+.card-footer{
+ display:flex;align-items:center;justify-content:space-between;
+ position:relative;z-index:2
+}
+.card-footer small{font-size:11px;color:#d0e0d3;font-weight:700}
+.card-footer strong{font-size:14px;color:#ffcc9a}
+.card-decoration{
+ position:absolute;left:23px;bottom:77px;
+ font-size:65px;font-weight:1000;color:rgba(255,255,255,.055);
+ transform:rotate(-14deg)
+}
 
-    /* ===== هدر برند ===== */
-    .brand-header {
-      padding: 28px 24px 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      z-index: 10;
-    }
+/* BUTTON */
+.primary-button{
+ position:relative;z-index:3;
+ width:100%;margin-top:22px;border:0;
+ background:linear-gradient(105deg,#ffb56f,#f47c43 55%,#e96b3d);
+ background-size:200% auto;
+ color:#fff;border-radius:17px 17px 5px 17px;
+ min-height:62px;padding:14px 20px;
+ display:flex;align-items:center;justify-content:space-between;
+ font-size:18px;font-weight:1000;
+ box-shadow:0 10px 25px rgba(236,117,62,.24);
+ transition:transform .25s,box-shadow .25s;
+ overflow:hidden
+}
+.primary-button:before{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(110deg,transparent 25%,rgba(255,255,255,.4),transparent 65%);
+ transform:translateX(110%);
+ animation:buttonShine 4s infinite
+}
+@keyframes buttonShine{50%,100%{transform:translateX(-110%)}}
+.primary-button:active{transform:scale(.975);box-shadow:0 4px 12px rgba(236,117,62,.2)}
+.button-icon{
+ width:35px;height:35px;border-radius:12px;
+ background:rgba(255,255,255,.22);
+ display:grid;place-items:center;font-size:23px
+}
 
-    .logo {
-      font-size: 2.6rem;
-      font-weight: 900;
-      letter-spacing: -2px;
-      color: var(--ink-strong);
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      text-shadow: 4px 4px 0 rgba(255, 165, 2, 0.4);
-    }
+/* FLOATING DETAILS */
+.decor-row{
+ display:flex;align-items:center;justify-content:space-between;
+ margin:23px 2px 18px
+}
+.decor-title{font-size:18px;font-weight:1000}
+.decor-sub{font-size:11px;color:var(--muted);margin-top:4px;font-weight:700}
+.live-pill{
+ padding:7px 11px;border-radius:30px;
+ background:#e5eee1;color:#416e4e;
+ font-size:10px;font-weight:900
+}
 
-    .logo .spark {
-      font-size: 3rem;
-      color: var(--brand-spark);
-      animation: pulseSpark 1.5s ease-in-out infinite;
-      display: inline-block;
-    }
+/* STATS */
+.stats-grid{
+ display:grid;grid-template-columns:1fr 1fr;gap:11px
+}
+.stat{
+ min-height:125px;position:relative;overflow:hidden;
+ border:1px solid rgba(255,255,255,.9);
+ background:rgba(255,255,255,.65);
+ border-radius:19px 19px 5px 19px;
+ padding:16px 15px;
+ box-shadow:0 7px 22px rgba(40,50,40,.035);
+ transition:transform .3s,border-color .3s
+}
+.stat:after{
+ content:"";position:absolute;width:65px;height:65px;
+ border-radius:50%;left:-24px;bottom:-30px;
+ background:var(--stat-color);opacity:.12;
+ transition:transform .4s
+}
+.stat:active{transform:scale(.97)}
+.stat:active:after{transform:scale(2)}
+.stat-icon{
+ width:37px;height:37px;border-radius:13px;
+ display:grid;place-items:center;
+ background:var(--stat-bg);font-size:18px;
+ margin-bottom:12px
+}
+.stat-label{font-size:11px;color:#7e8279;font-weight:800}
+.stat-value{
+ font-size:21px;font-weight:1000;color:var(--stat-color);
+ margin-top:3px;display:block
+}
+.stat:nth-child(1){--stat-color:#e67b43;--stat-bg:#fbe9dc}
+.stat:nth-child(2){--stat-color:#42795a;--stat-bg:#e4f0e5}
+.stat:nth-child(3){--stat-color:#8d79ad;--stat-bg:#eee8f7}
+.stat:nth-child(4){--stat-color:#bd8266;--stat-bg:#f7eae3}
 
-    @keyframes pulseSpark {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.2) rotate(10deg); }
-    }
+/* PROCESS */
+.process{
+ margin-top:27px;padding:20px;
+ background:rgba(255,255,255,.58);
+ border:1px solid rgba(255,255,255,.9);
+ border-radius:23px 23px 6px 23px
+}
+.process-heading{
+ display:flex;align-items:center;justify-content:space-between;
+ margin-bottom:21px
+}
+.process-heading strong{font-size:16px;font-weight:1000}
+.process-heading span{font-size:10px;color:var(--muted);font-weight:800}
+.process-track{display:flex;align-items:center;gap:7px}
+.process-step{flex:1;text-align:center;min-width:0}
+.step-circle{
+ width:39px;height:39px;border-radius:14px;
+ margin:0 auto 9px;display:grid;place-items:center;
+ background:#e8eee5;color:#436d51;font-weight:1000;
+ position:relative
+}
+.process-step:nth-child(3) .step-circle{
+ background:#f9e7d9;color:#d47740
+}
+.step-circle:after{
+ content:"";position:absolute;inset:-4px;
+ border:1px solid currentColor;border-radius:17px;opacity:.2
+}
+.process-step small{font-size:10px;font-weight:800;color:#73786e;white-space:nowrap}
+.track-line{
+ height:2px;flex:1;background:linear-gradient(90deg,#d4e2d2,#efc8a9);
+ margin-top:-22px;min-width:8px
+}
 
-    .badge-urgent {
-      background: var(--ink-strong);
-      color: var(--brand-gold);
-      font-size: 1.1rem;
-      font-weight: 800;
-      padding: 10px 18px;
-      border-radius: 50px 10px 50px 10px;
-      letter-spacing: 1px;
-      box-shadow: 4px 4px 0 var(--brand-gold);
-      animation: badgeFloat 3s ease-in-out infinite;
-    }
+/* INFORMATION BANNER */
+.info-banner{
+ margin-top:18px;padding:18px;
+ border-radius:19px 19px 5px 19px;
+ background:linear-gradient(110deg,#f5e8d9,#f6eee5);
+ display:flex;align-items:center;gap:14px;
+ position:relative;overflow:hidden
+}
+.info-symbol{
+ width:47px;height:47px;flex-shrink:0;
+ border-radius:16px;background:#fffaf2;
+ display:grid;place-items:center;font-size:24px;
+ box-shadow:0 5px 15px rgba(90,60,30,.06)
+}
+.info-banner strong{font-size:13px;font-weight:1000;display:block}
+.info-banner p{font-size:11px;line-height:1.9;color:#8a786a;margin-top:4px;font-weight:700}
+.info-arrow{margin-right:auto;color:#b17e5a;font-size:20px}
 
-    @keyframes badgeFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
+/* BOTTOM NAV */
+.bottom-nav{
+ position:fixed;bottom:0;left:0;right:0;z-index:100;
+ height:calc(var(--nav) + env(safe-area-inset-bottom));
+ padding:8px 9px calc(8px + env(safe-area-inset-bottom));
+ background:rgba(250,249,244,.88);
+ backdrop-filter:blur(22px);
+ -webkit-backdrop-filter:blur(22px);
+ border-top:1px solid rgba(255,255,255,.95);
+ box-shadow:0 -8px 30px rgba(42,49,37,.07);
+ display:flex;justify-content:space-around;align-items:center
+}
+.nav-item{
+ text-decoration:none;color:#93958c;
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;gap:3px;
+ min-width:65px;position:relative;
+ font-size:10px;font-weight:800;transition:.25s
+}
+.nav-icon{
+ width:37px;height:32px;display:grid;place-items:center;
+ border-radius:12px;font-size:20px;transition:.25s
+}
+.nav-item.active{color:#e87943}
+.nav-item.active .nav-icon{
+ background:#fbe6d7;transform:translateY(-4px);
+ box-shadow:0 5px 12px rgba(235,121,65,.12)
+}
+.nav-item.active:before{
+ content:"";position:absolute;top:-9px;width:18px;height:3px;
+ border-radius:10px;background:var(--orange)
+}
 
-    /* ===== بخش هیرو (معرفی) ===== */
-    .hero {
-      padding: 20px 24px 10px;
-      position: relative;
-      z-index: 5;
-    }
+/* ENTRANCE */
+.reveal{
+ opacity:0;transform:translateY(22px);
+ transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.header{animation:appear .7s both}
+.hero{animation:appear .8s .1s both}
+@keyframes appear{
+ from{opacity:0;transform:translateY(17px)}
+ to{opacity:1;transform:translateY(0)}
+}
 
-    .hero-title {
-      font-size: 3.8rem;
-      font-weight: 900;
-      line-height: 1.15;
-      margin-bottom: 16px;
-      position: relative;
-    }
-
-    /* کلمات کلیدی با خط زیر رنگی و ضخیم */
-    .key-word {
-      position: relative;
-      display: inline-block;
-      white-space: nowrap;
-    }
-
-    .key-word::after {
-      content: '';
-      position: absolute;
-      bottom: 4px;
-      left: 0;
-      width: 100%;
-      height: 12px;
-      background: var(--brand-gold);
-      opacity: 0.5;
-      border-radius: 4px;
-      z-index: -1;
-      transform: skewX(-8deg);
-      animation: underlineGrow 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    .key-word.red::after { background: var(--brand-spark); opacity: 0.45; }
-    .key-word.mint::after { background: var(--brand-mint); opacity: 0.5; }
-    .key-word.violet::after { background: var(--brand-violet); opacity: 0.4; }
-
-    @keyframes underlineGrow {
-      from { width: 0; opacity: 0; }
-      to { width: 100%; opacity: 0.5; }
-    }
-
-    .key-word.bold {
-      font-weight: 900;
-      color: var(--brand-spark);
-      text-shadow: 2px 2px 0 rgba(255, 71, 87, 0.2);
-    }
-
-    .hero-sub {
-      font-size: 1.7rem;
-      font-weight: 600;
-      color: var(--ink-soft);
-      line-height: 1.5;
-      margin-top: 10px;
-      margin-bottom: 24px;
-    }
-
-    .hero-sub .highlight {
-      font-weight: 900;
-      color: var(--brand-spark);
-      background: linear-gradient(135deg, var(--brand-spark), #ff6b9d);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* ===== کارت اصلی (غیر متقارن، سه بعدی، خاص) ===== */
-    .main-card {
-      margin: 20px 24px;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 2px solid rgba(255, 255, 255, 0.9);
-      border-radius: 20px 80px 20px 80px; /* گوشه‌های کاملاً نامتقارن */
-      padding: 32px 24px;
-      box-shadow: var(--shadow-3d);
-      position: relative;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      transition: transform 0.1s ease-out;
-      cursor: default;
-    }
-
-    /* افکت درخشش دنبال کننده موس (Glare) */
-    .main-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255,255,255,0.6), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .main-card:hover::before {
-      opacity: 1;
-    }
-
-    /* نوار رنگی بالای کارت */
-    .card-stripe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 8px;
-      background: linear-gradient(90deg, var(--brand-spark), var(--brand-gold), var(--brand-mint), var(--brand-violet));
-      background-size: 300% 100%;
-      animation: stripeFlow 4s linear infinite;
-    }
-
-    @keyframes stripeFlow {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 300% 50%; }
-    }
-
-    .card-label {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--ink-soft);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-label .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--brand-mint);
-      box-shadow: 0 0 10px var(--brand-mint);
-      animation: dotBlink 1.5s infinite;
-    }
-
-    @keyframes dotBlink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    .card-amount {
-      font-size: 4rem;
-      font-weight: 900;
-      color: var(--ink-strong);
-      line-height: 1.2;
-      margin-bottom: 4px;
-      letter-spacing: -2px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .card-amount .currency {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--ink-soft);
-      margin-right: 8px;
-    }
-
-    .card-amount .small-note {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--ink-soft);
-      display: block;
-      margin-top: 8px;
-      letter-spacing: 0;
-    }
-
-    /* شمارنده متحرک */
-    .counter-number {
-      display: inline-block;
-      direction: ltr;
-      unicode-bidi: embed;
-    }
-
-    /* دکمه CTA (بسیار خاص) */
-    .cta-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      margin-top: 28px;
-      padding: 22px 20px;
-      background: var(--ink-strong);
-      color: #fff;
-      font-size: 2rem;
-      font-weight: 900;
-      border: none;
-      border-radius: 16px 60px 16px 60px;
-      box-shadow: 6px 6px 0 var(--brand-gold), 0 10px 30px rgba(255, 165, 2, 0.3);
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
-      position: relative;
-      overflow: hidden;
-      z-index: 5;
-    }
-
-    .cta-button:active {
-      transform: translate(4px, 4px);
-      box-shadow: 2px 2px 0 var(--brand-gold);
-    }
-
-    .cta-button .arrow {
-      font-size: 2.2rem;
-      animation: arrowBounce 1s infinite alternate;
-    }
-
-    @keyframes arrowBounce {
-      from { transform: translateX(0); }
-      to { transform: translateX(-10px); }
-    }
-
-    /* درخشش عبوری روی دکمه */
-    .cta-button::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: -100%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      transform: skewX(-20deg);
-      animation: shineSweep 2.5s infinite;
-    }
-
-    @keyframes shineSweep {
-      0% { right: -100%; }
-      60% { right: 150%; }
-      100% { right: 150%; }
-    }
-
-    /* ===== بخش آمار/اعتماد (کارت‌های کوچک نامتقارن) ===== */
-    .trust-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin: 24px;
-    }
-
-    .trust-item {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(8px);
-      border-radius: 12px 40px 12px 40px; /* نامتقارن */
-      padding: 20px 16px;
-      border: 2px solid rgba(255,255,255,0.8);
-      box-shadow: 6px 6px 0 rgba(0,0,0,0.04);
-      text-align: center;
-      transition: all 0.3s;
-      animation: floatItem 4s ease-in-out infinite;
-    }
-
-    .trust-item:nth-child(1) { animation-delay: 0s; }
-    .trust-item:nth-child(2) { animation-delay: 1s; }
-    .trust-item:nth-child(3) { animation-delay: 2s; }
-    .trust-item:nth-child(4) { animation-delay: 3s; }
-
-    @keyframes floatItem {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .trust-icon {
-      font-size: 2.8rem;
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .trust-label {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--ink-soft);
-    }
-
-    .trust-value {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--brand-spark);
-      display: block;
-      margin-top: 4px;
-    }
-
-    /* ===== تایمر فوریت (خاص و زنده) ===== */
-    .urgency-bar {
-      margin: 10px 24px 20px;
-      background: var(--ink-strong);
-      color: #fff;
-      border-radius: 50px 16px 50px 16px;
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 0 0 3px var(--brand-gold);
-      animation: urgencyPulse 1.8s infinite;
-    }
-
-    @keyframes urgencyPulse {
-      0%, 100% { box-shadow: 0 0 0 3px var(--brand-gold); }
-      50% { box-shadow: 0 0 0 8px rgba(255, 165, 2, 0.3); }
-    }
-
-    .urgency-text {
-      font-size: 1.4rem;
-      font-weight: 700;
-    }
-
-    .urgency-timer {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: var(--brand-gold);
-      font-variant-numeric: tabular-nums;
-      direction: ltr;
-    }
-
-    /* ===== ناوبری پایین (Bottom Nav) ===== */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 12px 10px 20px;
-      border-top: 3px solid rgba(255,255,255,0.9);
-      box-shadow: 0 -10px 30px rgba(0,0,0,0.08);
-      z-index: 100;
-      border-radius: 30px 30px 0 0;
-    }
-
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      padding: 6px 14px;
-      border-radius: 14px 30px 14px 30px;
-      text-decoration: none;
-      color: #888;
-      font-size: 1.2rem;
-      font-weight: 700;
-      transition: all 0.2s;
-      position: relative;
-    }
-
-    .nav-item.active {
-      color: var(--ink-strong);
-      background: rgba(255, 165, 2, 0.2);
-    }
-
-    .nav-item.active .nav-icon {
-      transform: scale(1.15);
-      filter: drop-shadow(0 0 8px var(--brand-gold));
-    }
-
-    .nav-icon {
-      font-size: 2rem;
-      transition: transform 0.2s;
-    }
-
-    /* دات نشانگر فعال */
-    .nav-item.active::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      width: 6px;
-      height: 6px;
-      background: var(--brand-spark);
-      border-radius: 50%;
-      animation: dotPulse 1s infinite;
-    }
-
-    @keyframes dotPulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.5); }
-    }
-
-    /* ===== تنظیمات ریسپانسیو ===== */
-    @media (max-width: 380px) {
-      .hero-title { font-size: 3rem; }
-      .card-amount { font-size: 3rem; }
-      .cta-button { font-size: 1.6rem; padding: 18px; }
-    }
-
-    /* ===== اسکرول‌بار مخفی ===== */
-    ::-webkit-scrollbar { width: 0; }
-  </style>
+@media(min-width:600px){
+ body{padding-top:12px}
+ .container{width:min(100% - 50px,500px)}
+}
+@media(max-width:370px){
+ .hero h1{font-size:37px}
+ .amount strong{font-size:38px}
+ .stat{padding:13px}
+ .nav-item{min-width:58px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{
+ animation-duration:.01ms!important;
+ animation-iteration-count:1!important;
+ scroll-behavior:auto!important;
+ transition-duration:.01ms!important
+ }
+ #particles{display:none}
+}
+</style>
 </head>
+
 <body>
 
-  <!-- پس‌زمینه مِش متحرک -->
-  <div class="bg-canvas"></div>
-  
-  <!-- بوم ذرات شناور -->
-  <canvas id="particle-canvas"></canvas>
+<div class="ambient"></div>
+<canvas id="particles"></canvas>
 
-  <!-- هدر برند -->
-  <header class="brand-header">
-    <div class="logo">
-      <span class="spark">✦</span>
-      اَبر وام
-    </div>
-    <div class="badge-urgent">⚡ فوری</div>
-  </header>
+<main class="container">
 
-  <!-- بخش هیرو (معرفی اصلی) -->
-  <section class="hero">
-    <h1 class="hero-title">
-      <span class="key-word bold">پول</span> لازم داری؟<br>
-      <span class="key-word red">همین حالا</span> بگیر!
-    </h1>
-    <p class="hero-sub">
-      <span class="highlight">وام فوری</span> بدون ضامن، بدون تشریفات، فقط با چند کلیک. 
-      <span class="key-word mint">هوش مصنوعی</span> ما در کمتر از ۳ دقیقه بهت جواب میده.
-    </p>
-  </section>
-
-  <!-- کارت اصلی (مبلغ و دکمه) -->
-  <div class="main-card" id="tiltCard">
-    <div class="card-stripe"></div>
-    
-    <div class="card-label">
-      <span class="dot"></span>
-      مبلغ قابل دریافت
-    </div>
-    
-    <div class="card-amount">
-      <span class="counter-number" id="amountCounter">0</span>
-      <span class="currency">تومان</span>
-      <span class="small-note">تا سقف ۵۰ میلیون تومان</span>
-    </div>
-
-    <button class="cta-button" id="ctaBtn">
-      درخواست فوری
-      <span class="arrow">←</span>
-    </button>
+<header class="header">
+ <div class="brand">
+  <div class="brand-mark">✳</div>
+  <div>
+   <div class="brand-name">اَبر وام</div>
+   <div class="brand-caption">تجربه‌ای متفاوت در دریافت وام</div>
   </div>
+ </div>
+ <div class="header-action"><i></i> سامانه فعال</div>
+</header>
 
-  <!-- نوار فوریت (تایمر) -->
-  <div class="urgency-bar">
-    <span class="urgency-text">⏳ پیشنهاد ویژه تا:</span>
-    <span class="urgency-timer" id="timerDisplay">۰۲:۵۹</span>
+<section class="hero">
+ <div class="hero-kicker">✦ راه تازه‌ای برای تأمین مالی</div>
+
+ <h1>
+  <span class="line">وقتی نیاز داری،</span>
+  <span class="line"><span class="gradient-text">ساده‌تر</span> شروع کن.</span>
+  <span class="line hero-highlight">هوشمندانه‌تر بگیر.</span>
+ </h1>
+
+ <p class="hero-description">
+  مسیر دریافت وام را <strong>ساده، شفاف و هوشمند</strong>
+  تجربه کن. اطلاعاتت را ثبت کن و شرایط دریافت تسهیلات را بررسی کن.
+ </p>
+
+ <div class="hero-bottom">
+  <div class="trust-mini">
+   <div class="avatar-stack">
+    <span>✦</span><span>◈</span><span>●</span>
+   </div>
+   <small>تجربه‌ای ساده و آنلاین</small>
   </div>
+  <div class="hero-stamp">SMART<br>FINANCE<br>✳</div>
+ </div>
+</section>
 
-  <!-- بخش اعتماد (آمار) -->
-  <div class="trust-grid">
-    <div class="trust-item">
-      <span class="trust-icon">👥</span>
-      <span class="trust-label">کاربر فعال</span>
-      <span class="trust-value"><span class="counter-number" data-target="850000">۰</span>+</span>
-    </div>
-    <div class="trust-item">
-      <span class="trust-icon">⚡</span>
-      <span class="trust-label">میانگین واریز</span>
-      <span class="trust-value"><span class="counter-number" data-target="180">۰</span> ثانیه</span>
-    </div>
-    <div class="trust-item">
-      <span class="trust-icon">🛡️</span>
-      <span class="trust-label">رضایت</span>
-      <span class="trust-value"><span class="counter-number" data-target="98">۰</span>٪</span>
-    </div>
-    <div class="trust-item">
-      <span class="trust-icon">📅</span>
-      <span class="trust-label">اقساط</span>
-      <span class="trust-value"><span class="counter-number" data-target="12">۰</span> ماهه</span>
-    </div>
+<section class="feature-card reveal">
+ <div class="card-top">
+  <div class="card-label"><b></b> سقف تسهیلات قابل بررسی</div>
+  <div class="card-index">01 / 04</div>
+ </div>
+
+ <div class="amount-area">
+  <div class="amount-caption">امکان بررسی درخواست تا سقف</div>
+  <div class="amount">
+   <strong id="amount">۵۰</strong>
+   <span>میلیون تومان</span>
   </div>
+  <div class="amount-note">
+   <span>ویژه متقاضیان</span>
+   شرایط دریافت پس از بررسی مشخص می‌شود
+  </div>
+ </div>
 
-  <!-- ناوبری پایین -->
-  <nav class="bottom-nav">
-    <a href="#" class="nav-item active">
-      <span class="nav-icon">🏠</span>
-      <span>خانه</span>
-    </a>
-    <a href="#" class="nav-item">
-      <span class="nav-icon">📋</span>
-      <span>راهنما</span>
-    </a>
-    <a href="#" class="nav-item">
-      <span class="nav-icon">✍️</span>
-      <span>درخواست</span>
-    </a>
-    <a href="#" class="nav-item">
-      <span class="nav-icon">💰</span>
-      <span>اقساط</span>
-    </a>
-  </nav>
+ <div class="card-decoration">FINANCE</div>
+ <hr class="card-divider">
 
-  <script>
-    (function() {
-      // ===== ۱. انیمیشن شمارنده (Anime.js) =====
-      const counterElements = document.querySelectorAll('.counter-number');
-      
-      // تابع تبدیل اعداد به فارسی
-      function toPersianNum(num) {
-        const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-        return num.toString().replace(/\d/g, d => persianDigits[d]);
-      }
+ <div class="card-footer">
+  <small>فرآیند ثبت درخواست</small>
+  <strong>آنلاین و مرحله‌ای ✦</strong>
+ </div>
 
-      // شمارنده اصلی مبلغ (از ۰ تا ۵۰۰۰۰۰۰۰)
-      const amountEl = document.getElementById('amountCounter');
-      if (amountEl) {
-        anime({
-          targets: { value: 0 },
-          value: 50000000,
-          round: 1,
-          duration: 2000,
-          easing: 'easeOutExpo',
-          update: function(anim) {
-            const val = Math.round(anim.animations[0].currentValue);
-            amountEl.textContent = toPersianNum(val.toLocaleString('fa-IR'));
-          }
-        });
-      }
+ <button class="primary-button" id="requestButton">
+  <span>شروع ثبت درخواست</span>
+  <span class="button-icon">←</span>
+ </button>
+</section>
 
-      // شمارنده‌های بخش اعتماد
-      counterElements.forEach(el => {
-        if (el.id === 'amountCounter') return; // رد کردن شمارنده اصلی
-        const target = parseInt(el.getAttribute('data-target')) || 0;
-        if (target === 0) return;
-        
-        anime({
-          targets: { value: 0 },
-          value: target,
-          round: 1,
-          duration: 1500,
-          delay: 400,
-          easing: 'easeOutCubic',
-          update: function(anim) {
-            const val = Math.round(anim.animations[0].currentValue);
-            // برای اعداد بزرگ جداکننده هزارگان
-            if (val >= 1000) {
-              el.textContent = toPersianNum(val.toLocaleString('fa-IR'));
-            } else {
-              el.textContent = toPersianNum(val);
-            }
-          }
-        });
-      });
+<section class="reveal">
+ <div class="decor-row">
+  <div>
+   <div class="decor-title">تجربه‌ای متفاوت</div>
+   <div class="decor-sub">جزئیات خدمات ابر وام</div>
+  </div>
+  <div class="live-pill">✦ SMART SERVICE</div>
+ </div>
 
-      // ===== ۲. افکت تیلت سه بعدی کارت (Tilt 3D) =====
-      const card = document.getElementById('tiltCard');
-      if (card) {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -8; // حداکثر ۸ درجه
-          const rotateY = ((x - centerX) / centerX) * 8;
-          
-          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-          
-          // به‌روزرسانی موقعیت درخشش
-          const glareX = (x / rect.width) * 100;
-          const glareY = (y / rect.height) * 100;
-          card.style.setProperty('--glare-x', glareX + '%');
-          card.style.setProperty('--glare-y', glareY + '%');
-        });
-        
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-        });
-        
-        // برای لمس (موبایل) - تیلت ملایم
-        card.addEventListener('touchmove', (e) => {
-          const touch = e.touches[0];
-          const rect = card.getBoundingClientRect();
-          const x = touch.clientX - rect.left;
-          const y = touch.clientY - rect.top;
-          
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -4;
-          const rotateY = ((x - centerX) / centerX) * 4;
-          
-          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
-        }, { passive: true });
-        
-        card.addEventListener('touchend', () => {
-          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-        });
-      }
+ <div class="stats-grid">
+  <article class="stat">
+   <div class="stat-icon">◈</div>
+   <div class="stat-label">مبلغ تسهیلات</div>
+   <strong class="stat-value">۵۰ میلیون+</strong>
+  </article>
+  <article class="stat">
+   <div class="stat-icon">⌁</div>
+   <div class="stat-label">فرآیند ثبت</div>
+   <strong class="stat-value">کاملاً آنلاین</strong>
+  </article>
+  <article class="stat">
+   <div class="stat-icon">✳</div>
+   <div class="stat-label">بررسی اطلاعات</div>
+   <strong class="stat-value">هوشمند</strong>
+  </article>
+  <article class="stat">
+   <div class="stat-icon">◇</div>
+   <div class="stat-label">دسترسی</div>
+   <strong class="stat-value">۲۴ ساعته</strong>
+  </article>
+ </div>
+</section>
 
-      // ===== ۳. تایمر شمارش معکوس =====
-      const timerEl = document.getElementById('timerDisplay');
-      if (timerEl) {
-        let totalSeconds = 179; // ۲:۵۹
-        setInterval(() => {
-          if (totalSeconds <= 0) totalSeconds = 179; // ریست
-          totalSeconds--;
-          const mins = Math.floor(totalSeconds / 60);
-          const secs = totalSeconds % 60;
-          const persianMins = toPersianNum(mins.toString().padStart(2, '0'));
-          const persianSecs = toPersianNum(secs.toString().padStart(2, '0'));
-          timerEl.textContent = `${persianMins}:${persianSecs}`;
-        }, 1000);
-      }
+<section class="process reveal">
+ <div class="process-heading">
+  <strong>مسیر دریافت تسهیلات</strong>
+  <span>۴ مرحله ساده</span>
+ </div>
 
-      // ===== ۴. ذرات شناور (Canvas) =====
-      const canvas = document.getElementById('particle-canvas');
-      const ctx = canvas.getContext('2d');
-      
-      let w, h;
-      let particles = [];
-      
-      function resizeCanvas() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-      }
-      window.addEventListener('resize', resizeCanvas);
-      resizeCanvas();
+ <div class="process-track">
+  <div class="process-step">
+   <div class="step-circle">۰۱</div>
+   <small>ثبت اطلاعات</small>
+  </div>
+  <div class="track-line"></div>
+  <div class="process-step">
+   <div class="step-circle">۰۲</div>
+   <small>بررسی شرایط</small>
+  </div>
+  <div class="track-line"></div>
+  <div class="process-step">
+   <div class="step-circle">۰۳</div>
+   <small>تکمیل پرونده</small>
+  </div>
+  <div class="track-line"></div>
+  <div class="process-step">
+   <div class="step-circle">۰۴</div>
+   <small>اعلام نتیجه</small>
+  </div>
+ </div>
+</section>
 
-      class Particle {
-        constructor() {
-          this.reset();
-        }
-        reset() {
-          this.x = Math.random() * w;
-          this.y = Math.random() * h;
-          this.size = Math.random() * 6 + 2;
-          this.speedX = (Math.random() - 0.5) * 0.8;
-          this.speedY = (Math.random() - 0.5) * 0.8;
-          this.color = `hsla(${Math.random() * 60 + 20}, 80%, 60%, 0.6)`;
-          this.rotation = Math.random() * Math.PI * 2;
-          this.rotSpeed = (Math.random() - 0.5) * 0.02;
-        }
-        update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          this.rotation += this.rotSpeed;
-          
-          if (this.x < -20 || this.x > w + 20) this.speedX *= -1;
-          if (this.y < -20 || this.y > h + 20) this.speedY *= -1;
-        }
-        draw() {
-          ctx.save();
-          ctx.translate(this.x, this.y);
-          ctx.rotate(this.rotation);
-          ctx.fillStyle = this.color;
-          ctx.shadowColor = 'rgba(255, 165, 2, 0.3)';
-          ctx.shadowBlur = 15;
-          
-          // اشکال متنوع: دایره، مربع، مثلث
-          const shape = Math.floor(this.rotation * 10) % 3;
-          if (shape === 0) {
-            ctx.beginPath();
-            ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-            ctx.fill();
-          } else if (shape === 1) {
-            ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
-          } else {
-            ctx.beginPath();
-            ctx.moveTo(0, -this.size);
-            ctx.lineTo(this.size, this.size);
-            ctx.lineTo(-this.size, this.size);
-            ctx.closePath();
-            ctx.fill();
-          }
-          ctx.restore();
-        }
-      }
+<section class="info-banner reveal">
+ <div class="info-symbol">✧</div>
+ <div>
+  <strong>قبل از درخواست، راهنما را ببین</strong>
+  <p>با مراحل و شرایط دریافت تسهیلات آشنا شو و آگاهانه اقدام کن.</p>
+ </div>
+ <span class="info-arrow">←</span>
+</section>
 
-      // ایجاد ذرات
-      const particleCount = 45;
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
+</main>
 
-      function animateParticles() {
-        ctx.clearRect(0, 0, w, h);
-        particles.forEach(p => {
-          p.update();
-          p.draw();
-        });
-        requestAnimationFrame(animateParticles);
-      }
-      animateParticles();
+<nav class="bottom-nav">
+ <a href="#" class="nav-item active">
+  <span class="nav-icon">⌂</span><span>خانه</span>
+ </a>
+ <a href="#" class="nav-item">
+  <span class="nav-icon">▤</span><span>راهنما</span>
+ </a>
+ <a href="#" class="nav-item">
+  <span class="nav-icon">✎</span><span>درخواست</span>
+ </a>
+ <a href="#" class="nav-item">
+  <span class="nav-icon">◈</span><span>اقساط</span>
+ </a>
+</nav>
 
-      // ===== ۵. انیمیشن ورود المان‌ها (Stagger) =====
-      // با استفاده از CSS خودکار انجام می‌شود، اما برای کارت اصلی یک انیمیشن اضافه
-      anime({
-        targets: '.main-card',
-        translateY: [60, 0],
-        opacity: [0, 1],
-        duration: 800,
-        easing: 'easeOutCubic',
-        delay: 300
-      });
+<script>
+(()=>{
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      anime({
-        targets: '.trust-item',
-        translateY: [40, 0],
-        opacity: [0, 1],
-        duration: 600,
-        delay: anime.stagger(100, { start: 600 }),
-        easing: 'easeOutCubic'
-      });
+ // Persian number animation
+ const amount=document.getElementById('amount');
+ if(!reduced){
+  const start=performance.now();
+  const duration=1300;
+  function count(now){
+   const p=Math.min((now-start)/duration,1);
+   const eased=1-Math.pow(1-p,4);
+   amount.textContent=Math.round(50*eased).toLocaleString('fa-IR');
+   if(p<1)requestAnimationFrame(count);
+  }
+  requestAnimationFrame(count);
+ }
 
-      // دکمه CTA تعامل لمسی
-      const ctaBtn = document.getElementById('ctaBtn');
-      if (ctaBtn) {
-        ctaBtn.addEventListener('click', () => {
-          // افکت لرزش کوچک
-          anime({
-            targets: ctaBtn,
-            translateX: [0, -8, 8, -4, 4, 0],
-            duration: 400,
-            easing: 'easeInOutQuad'
-          });
-          // در واقعیت اینجا به صفحه درخواست هدایت می‌شود
-          // window.location.href = '#';
-        });
-      }
+ // Scroll reveal
+ const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+   if(entry.isIntersecting){
+    entry.target.classList.add('visible');
+    observer.unobserve(entry.target);
+   }
+  });
+ },{threshold:.12});
+ document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-    })();
-  </script>
+ // Lightweight particles
+ const canvas=document.getElementById('particles');
+ const ctx=canvas.getContext('2d');
+ let w=0,h=0,particles=[];
+ let dpr=Math.min(devicePixelRatio||1,1.5);
+
+ function resize(){
+  w=innerWidth;h=innerHeight;
+  canvas.width=w*dpr;canvas.height=h*dpr;
+  canvas.style.width=w+'px';
+  canvas.style.height=h+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+ }
+ resize();
+ addEventListener('resize',resize,{passive:true});
+
+ const countParticles=Math.min(22,Math.floor(innerWidth/19));
+ for(let i=0;i<countParticles;i++){
+  particles.push({
+   x:Math.random()*w,
+   y:Math.random()*h,
+   r:1+Math.random()*2,
+   speed:.12+Math.random()*.22,
+   phase:Math.random()*6.28
+  });
+ }
+
+ let frame=0;
+ function animate(){
+  ctx.clearRect(0,0,w,h);
+  frame++;
+  particles.forEach(p=>{
+   p.y-=p.speed;
+   p.x+=Math.sin(frame*.008+p.phase)*.18;
+   if(p.y<-10){p.y=h+10;p.x=Math.random()*w}
+   ctx.beginPath();
+   ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+   ctx.fillStyle='rgba(211,133,85,.35)';
+   ctx.fill();
+  });
+  if(!document.hidden)requestAnimationFrame(animate);
+ }
+ if(!reduced)requestAnimationFrame(animate);
+
+ // CTA feedback
+ const btn=document.getElementById('requestButton');
+ btn.addEventListener('click',()=>{
+  btn.animate([
+   {transform:'scale(1)'},
+   {transform:'scale(.97)'},
+   {transform:'scale(1)'}
+  ],{duration:260,easing:'ease-out'});
+  // آدرس صفحه درخواست را اینجا متصل کنید.
+ });
+
+ // Navigation active state
+ document.querySelectorAll('.nav-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+   item.classList.add('active');
+  });
+ });
+})();
+</script>
+
 </body>
-  </html>
+</html>
