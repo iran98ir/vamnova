@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f2efe9">
+<meta name="description" content="ثبت درخواست تسهیلات — انجمن خصوصی سهراب">
+<title>ثبت درخواست | وام شخصی سهراب</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+
+<style>
+:root{
+  --bg:#f2efe9; --surface:#fbfaf7; --surface-2:#e9e3da;
+  --ink:#1c2025; --ink-2:#42464b; --muted:#77736e; --line:#dcd5ca;
+  --wine:#542c35; --wine-2:#713c45; --rust:#bd593b; --rust-light:#e18a61;
+  --cream:#e9d7c5; --white:#fff;
+  --shadow-sm:0 4px 12px rgba(34,29,26,.04),0 1px 3px rgba(34,29,26,.02);
+  --shadow:0 18px 50px rgba(34,29,26,.07),0 4px 12px rgba(34,29,26,.03);
+  --shadow-deep:0 28px 70px rgba(34,29,26,.14),0 8px 20px rgba(34,29,26,.06);
+  --shadow-wine:0 20px 50px rgba(84,44,53,.15),0 6px 16px rgba(84,44,53,.08);
+  --max:1160px;
+  --radius-lg:4px 28px 4px 28px; --radius-md:4px 20px 4px 20px; --radius-sm:4px 14px 4px 14px;
+  --ease:cubic-bezier(.22,.8,.25,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{background:var(--bg);color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;font-size:16px;min-height:100vh;overflow-x:hidden;padding-bottom:110px}
+button,a,input,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+::selection{background:var(--wine);color:#fff}
+
+.site-bg{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+.site-bg:before{content:"";position:absolute;inset:0;opacity:.34;background-image:linear-gradient(rgba(67,53,43,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(67,53,43,.045) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(to bottom,#000,transparent 78%)}
+.site-bg:after{content:"";position:absolute;width:750px;height:750px;top:-510px;left:-250px;border-radius:50%;border:1px solid rgba(84,44,53,.10);box-shadow:0 0 0 45px rgba(84,44,53,.025),0 0 0 100px rgba(84,44,53,.018),0 0 0 165px rgba(84,44,53,.012)}
+.bg-glow{position:absolute;width:500px;height:500px;border-radius:50%;filter:blur(90px);opacity:.13}
+.bg-glow.a{background:#c47a58;top:10%;right:-360px}
+.bg-glow.b{background:#81515b;top:58%;left:-390px}
+.page-gridline{position:fixed;z-index:-1;top:0;bottom:0;right:max(calc((100vw - var(--max))/2 - 35px),20px);width:1px;background:linear-gradient(transparent,rgba(84,44,53,.12),transparent);pointer-events:none}
+
+.wrap{width:min(calc(100% - 44px),var(--max));margin-inline:auto}
+.eyebrow{display:flex;align-items:center;gap:11px;color:var(--rust);font-size:13px;font-weight:900}
+.eyebrow:before{content:"";width:27px;height:2px;background:var(--rust)}
+.section-kicker{color:var(--rust);font-size:12px;font-weight:950;letter-spacing:1.5px}
+
+/* ── HERO ── */
+.hero{padding:64px 0 40px}
+.hero h1{font-size:clamp(44px,6.5vw,76px);font-weight:1000;line-height:1.35;letter-spacing:-3px;margin-top:22px}
+.hero h1 .line{display:block;overflow:hidden;padding-bottom:4px}
+.hero h1 .line span{display:inline-block}
+.hero h1 .accent{color:var(--wine);position:relative}
+.hero h1 .accent:after{content:"";position:absolute;right:0;bottom:2px;width:100%;height:6px;background:var(--rust);transform:scaleX(0);transform-origin:right;animation:drawLine .8s 1.1s forwards}
+@keyframes drawLine{to{transform:scaleX(1)}}
+.hero-text{max-width:640px;color:var(--ink-2);font-size:18px;line-height:2.1;font-weight:650;margin-top:20px}
+.hero-text strong{color:var(--wine);font-weight:950}
+.docs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.doc-card{position:relative;display:flex;gap:16px;align-items:flex-start;padding:24px;background:var(--surface);border:1px solid #e4ddd3;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s}
+.doc-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#c9b6a5}
+.doc-card:after{content:"";position:absolute;right:0;top:0;bottom:0;width:3px;background:var(--line);transition:background .3s}
+.doc-card:hover:after{background:var(--rust)}
+.doc-num{flex-shrink:0;width:46px;height:46px;display:grid;place-items:center;color:var(--wine);background:#eee5dc;border-radius:var(--radius-sm);font-size:22px;font-weight:1000}
+.doc-card h3{font-size:17px;font-weight:950;line-height:1.7}
+.doc-card p{margin-top:6px;color:var(--ink-2);font-size:15.5px;line-height:2;font-weight:600}
+.doc-card p strong{color:var(--wine);font-weight:900}
+
+/* ── TIMELINE ── */
+.timeline-zone{padding:26px 0 8px}
+.tl-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
+.tl-head h2{font-size:clamp(22px,3.4vw,30px);font-weight:950;letter-spacing:-.6px;margin-top:8px}
+.tl-scroll{overflow-x:auto;scrollbar-width:none;padding-bottom:6px;scroll-snap-type:x proximity}
+.tl-scroll::-webkit-scrollbar{display:none}
+.timeline{position:relative;display:grid;grid-template-columns:repeat(5,1fr);min-width:760px}
+.tl-track{position:absolute;top:27px;right:10%;left:10%;height:3px;background:var(--line);border-radius:3px}
+.tl-fill{position:absolute;top:0;right:0;bottom:0;width:0%;background:linear-gradient(to left,var(--wine),var(--rust));border-radius:3px;transition:width .7s var(--ease)}
+.tl-step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:0 8px;scroll-snap-align:center;background:none;border:0;font-family:inherit}
+.tl-node{width:56px;height:56px;display:grid;place-items:center;border-radius:50%;background:var(--surface);border:2px solid var(--line);color:var(--muted);transition:.4s var(--ease);position:relative}
+.tl-node svg{width:24px;height:24px}
+.tl-step small{direction:ltr;font-size:10px;font-weight:900;letter-spacing:2px;color:#a59a8e}
+.tl-step span{font-size:14px;font-weight:850;line-height:1.8;color:var(--muted);max-width:150px;transition:color .3s}
+.tl-step.active .tl-node{background:var(--wine);border-color:var(--wine);color:#fff;box-shadow:0 0 0 6px rgba(84,44,53,.12),var(--shadow-wine)}
+.tl-step.active span{color:var(--wine);font-weight:950}
+.tl-step.active .tl-node:after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1px solid rgba(189,89,59,.5);animation:ringPulse 2s ease infinite}
+@keyframes ringPulse{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.12);opacity:.2}}
+.tl-step.done .tl-node{background:var(--rust);border-color:var(--rust);color:#fff}
+.tl-step.done span{color:var(--ink-2)}
+.tl-step.clickable{cursor:pointer}
+.tl-step.clickable:hover .tl-node{transform:translateY(-3px)}
+.tl-step.pending{opacity:.62}
+
+/* ── FORM SHELL ── */
+.form-zone{padding:34px 0 10px}
+.step-panel{display:none}
+.step-panel.active{display:block;animation:panelIn .55s var(--ease)}
+@keyframes panelIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.form-card{position:relative;background:var(--surface);border:1px solid #e4ddd3;border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden}
+.form-card:before{content:"";position:absolute;top:0;right:0;width:4px;height:100%;background:var(--rust-light)}
+.form-card-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:26px 30px;border-bottom:1px solid #ece5db}
+.form-card-head h2{font-size:clamp(21px,3vw,27px);font-weight:950;letter-spacing:-.5px;margin-top:7px}
+.fch-code{direction:ltr;color:#a59a8e;font-size:11px;font-weight:900;letter-spacing:2px}
+
+/* accordion groups */
+.fgroup{border-top:1px solid #ece5db}
+.fgroup:first-of-type{border-top:0}
+.fgroup-head{width:100%;display:flex;align-items:center;gap:14px;padding:20px 30px;background:transparent;border:0;text-align:right;font-family:inherit;transition:background .25s}
+.fgroup-head:hover{background:rgba(255,255,255,.55)}
+.fg-num{flex-shrink:0;width:38px;height:38px;display:grid;place-items:center;background:#eee5dc;color:var(--wine);border-radius:var(--radius-sm);font-size:16px;font-weight:1000}
+.fgroup-head h3{flex:1;font-size:18px;font-weight:950;color:var(--ink)}
+.fg-chev{flex-shrink:0;width:36px;height:36px;display:grid;place-items:center;background:#ece5db;border-radius:var(--radius-sm);color:var(--wine);transition:transform .5s var(--ease),background .3s,color .3s}
+.fgroup.open .fg-chev{background:var(--wine);color:#fff;transform:rotate(180deg)}
+.fg-chev svg{width:17px;height:17px}
+.collapse{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.collapse.open{grid-template-rows:1fr}
+.collapse-inner{overflow:hidden;min-height:0}
+.fgroup-body{padding:4px 30px 28px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+.field label{font-size:16px;font-weight:900;color:var(--ink)}
+.field label .opt{font-size:12.5px;font-weight:750;color:var(--muted);margin-right:6px}
+.control{position:relative}
+.control input,.control textarea{width:100%;background:#fff;border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:15px 18px;padding-left:46px;font-size:17px;font-weight:650;color:var(--ink);transition:border-color .25s,box-shadow .25s;outline:none}
+.control textarea{resize:vertical;min-height:120px;line-height:2;padding-left:18px}
+.control input::placeholder,.control textarea::placeholder{color:#b3aca3;font-weight:600}
+.control input:focus,.control textarea:focus{border-color:var(--wine);box-shadow:0 0 0 4px rgba(84,44,53,.10)}
+.field.error input,.field.error textarea{border-color:var(--rust);box-shadow:0 0 0 4px rgba(189,89,59,.10)}
+.field-status{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:20px;height:20px;opacity:0;transition:opacity .25s;pointer-events:none}
+.field.valid .field-status.ok{opacity:1;color:var(--wine)}
+.field.error .field-status.bad{opacity:1;color:var(--rust)}
+.field-msg{display:none;align-items:center;gap:7px;color:var(--rust);font-size:13.5px;font-weight:800}
+.field.error .field-msg{display:flex}
+.field-note{display:flex;align-items:flex-start;gap:9px;padding:12px 15px;background:rgba(189,89,59,.07);border:1px solid rgba(189,89,59,.22);border-radius:var(--radius-sm);color:var(--wine);font-size:15.5px;font-weight:850;line-height:1.9}
+.field-note svg{width:18px;height:18px;flex-shrink:0;margin-top:3px;color:var(--rust)}
+.field-note.big{font-size:17px;font-weight:900}
+.field-note.big em{font-style:normal;background:linear-gradient(180deg,transparent 62%,rgba(189,89,59,.28) 62%)}
+
+/* custom select */
+.csel{position:relative}
+.csel-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:15px 18px;font-size:17px;font-weight:750;color:var(--ink);transition:border-color .25s,box-shadow .25s}
+.csel-btn:hover{border-color:#c9b6a5}
+.csel.open .csel-btn{border-color:var(--wine);box-shadow:0 0 0 4px rgba(84,44,53,.10)}
+.csel-btn .chev{width:34px;height:34px;display:grid;place-items:center;background:#ece5db;border-radius:10px;color:var(--wine);transition:transform .5s var(--ease),background .3s,color .3s}
+.csel.open .csel-btn .chev{background:var(--wine);color:#fff;transform:rotate(180deg)}
+.csel-btn .chev svg{width:16px;height:16px}
+.csel-menu{margin-top:8px}
+.csel-list{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;box-shadow:var(--shadow)}
+.csel-opt{width:100%;display:flex;align-items:center;gap:12px;padding:15px 18px;background:transparent;border:0;border-top:1px solid #f0eae1;text-align:right;font-size:16.5px;font-weight:800;color:var(--ink-2);transition:background .2s,color .2s}
+.csel-opt:first-child{border-top:0}
+.csel-opt:hover{background:rgba(84,44,53,.05);color:var(--wine)}
+.csel-opt .radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;transition:.25s}
+.csel-opt.selected{color:var(--wine)}
+.csel-opt.selected .radio{border-color:var(--rust)}
+.csel-opt.selected .radio:after{content:"";width:8px;height:8px;border-radius:50%;background:var(--rust)}
+
+/* notice */
+.notice{margin:0 30px}
+.notice-box{display:flex;gap:14px;align-items:flex-start;padding:22px;background:linear-gradient(145deg,#633842,#3d242c);border-radius:var(--radius-md);color:#fff;box-shadow:var(--shadow-wine)}
+.notice-box svg{width:26px;height:26px;flex-shrink:0;color:#e9c5ad;margin-top:2px}
+.notice-box p{font-size:17px;font-weight:850;line-height:2}
+.notice-box small{display:block;margin-top:6px;color:#e4cdd0;font-size:14px;font-weight:650}
+
+/* actions */
+.form-actions{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 30px;border-top:1px solid #ece5db}
+.btn-primary{position:relative;min-height:60px;display:inline-flex;align-items:center;justify-content:center;gap:16px;padding:0 30px;color:#fff;background:var(--wine);border:1px solid var(--wine);border-radius:var(--radius-md);box-shadow:var(--shadow-wine);font-size:16px;font-weight:950;overflow:hidden;transition:transform .25s,box-shadow .25s,background .25s,opacity .3s}
+.btn-primary:before{content:"";position:absolute;top:0;bottom:0;right:-65%;width:40%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.23),transparent);transition:right .7s}
+.btn-primary:hover:before{right:120%}
+.btn-primary:hover{transform:translateY(-3px);background:#683843;box-shadow:0 25px 60px rgba(84,44,53,.2)}
+.btn-primary:active{transform:scale(.98)}
+.btn-primary svg{width:20px;height:20px}
+.btn-primary:disabled{opacity:.4;pointer-events:none;box-shadow:none}
+.btn-ghost{min-height:56px;display:inline-flex;align-items:center;gap:10px;padding:0 22px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--radius-md);color:var(--wine);font-size:15.5px;font-weight:900;transition:.25s}
+.btn-ghost:hover{border-color:var(--wine);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.btn-ghost svg{width:18px;height:18px}
+.btn-ghost:disabled,.btn-ghost.off{opacity:.38;pointer-events:none}
+
+/* ── STEP 2 ── */
+.s2-intro{padding:26px 30px 6px}
+.s2-intro p{color:var(--ink-2);font-size:17px;line-height:2.1;font-weight:650;max-width:640px}
+.s2-intro p strong{color:var(--wine);font-weight:950}
+.bank-wrap{padding:22px 30px;display:flex;justify-content:center}
+.bank-card{position:relative;width:min(100%,560px);aspect-ratio:1.72;border-radius:var(--radius-lg);overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,.08),transparent 45%),linear-gradient(145deg,#633842,#3d242c);box-shadow:var(--shadow-deep);color:#fff;will-change:transform}
+.bank-card .guilloche{position:absolute;bottom:-70px;left:-60px;width:280px;height:280px;color:rgba(233,197,173,.20)}
+.bc-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:22px 26px 0}
+.bc-bank{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:900}
+.bc-bank .seal{width:34px;height:34px;border:1px solid rgba(255,255,255,.35);border-radius:50%;display:grid;place-items:center;color:#e8b994}
+.bc-bank .seal svg{width:17px;height:17px}
+.bc-tag{direction:ltr;font-size:10px;font-weight:900;letter-spacing:2px;color:rgba(255,255,255,.6)}
+.bc-chip{position:relative;z-index:1;display:flex;align-items:center;gap:12px;padding:16px 26px 0}
+.bc-chip .chip{width:44px;height:32px;border-radius:6px;background:linear-gradient(135deg,#e9c5ad,#c99b76);position:relative;overflow:hidden}
+.bc-chip .chip:before{content:"";position:absolute;inset:6px 8px;border:1px solid rgba(84,44,53,.4);border-radius:3px}
+.bc-chip svg{width:20px;height:20px;color:rgba(255,255,255,.6)}
+.bc-number{position:relative;z-index:1;direction:ltr;display:flex;justify-content:center;gap:18px;padding:18px 20px 0;font-size:clamp(21px,4.4vw,30px);font-weight:1000;letter-spacing:2px}
+.bc-bottom{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 26px 22px}
+.bc-owner small{display:block;color:rgba(255,255,255,.6);font-size:11px;font-weight:750}
+.bc-owner strong{display:block;margin-top:3px;font-size:16px;font-weight:950;color:#f0c5a2}
+.bc-copy{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:var(--radius-sm);color:#fff;font-size:13px;font-weight:850;transition:.25s;backdrop-filter:blur(4px)}
+.bc-copy:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
+.bc-copy svg{width:16px;height:16px}
+
+/* upload */
+.upload-zone{padding:8px 30px 26px}
+.upload-label{font-size:18px;font-weight:950;color:var(--ink);margin-bottom:12px}
+.dropzone{position:relative;border:2px dashed #cfc3b7;border-radius:var(--radius-md);background:linear-gradient(165deg,#fdfcf9,var(--surface));padding:30px 26px;text-align:center;transition:border-color .3s,background .3s,transform .3s;cursor:pointer}
+.dropzone:hover,.dropzone.drag{border-color:var(--rust);background:#fff}
+.dropzone.drag{transform:scale(1.01)}
+.dz-icon{width:60px;height:60px;margin:0 auto 14px;display:grid;place-items:center;background:#eee5dc;color:var(--wine);border-radius:var(--radius-md);transition:.3s}
+.dropzone:hover .dz-icon{background:var(--wine);color:#fff;transform:translateY(-3px)}
+.dz-icon svg{width:28px;height:28px}
+.dz-desc{color:var(--ink-2);font-size:15.5px;line-height:2;font-weight:650;max-width:460px;margin:0 auto}
+.dz-btn{display:inline-flex;align-items:center;gap:9px;margin-top:16px;padding:13px 24px;background:var(--wine);color:#fff;border:0;border-radius:var(--radius-sm);font-size:15px;font-weight:900;box-shadow:var(--shadow-wine);transition:.25s}
+.dz-btn:hover{background:#683843;transform:translateY(-2px)}
+.dz-btn svg{width:17px;height:17px}
+.dz-progress,.dz-done{display:none}
+.dropzone.uploading .dz-idle,.dropzone.done .dz-idle{display:none}
+.dropzone.uploading .dz-progress{display:block}
+.dropzone.done .dz-done{display:flex}
+.dz-progress{padding:8px 0}
+.dz-file{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--ink);font-size:15px;font-weight:850}
+.dz-file svg{width:18px;height:18px;color:var(--rust)}
+.dz-bar{height:8px;background:#ece5db;border-radius:6px;margin:16px auto 10px;max-width:380px;overflow:hidden}
+.dz-bar-fill{height:100%;width:0%;background:linear-gradient(to left,var(--wine),var(--rust));border-radius:6px;transition:width .2s linear}
+.dz-pct{color:var(--wine);font-size:15px;font-weight:950}
+.dz-status{margin-top:6px;color:var(--muted);font-size:13.5px;font-weight:750}
+.dz-done{align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.dz-thumb{width:64px;height:64px;border-radius:var(--radius-sm);object-fit:cover;border:1px solid var(--line);background:#eee5dc;display:grid;place-items:center;color:var(--wine);overflow:hidden;flex-shrink:0}
+.dz-thumb img{width:100%;height:100%;object-fit:cover}
+.dz-thumb svg{width:26px;height:26px}
+.dz-done-text{text-align:right}
+.dz-done-text strong{display:flex;align-items:center;gap:8px;color:var(--wine);font-size:16px;font-weight:950}
+.dz-done-text strong svg{width:19px;height:19px;color:var(--rust)}
+.dz-done-text small{display:block;margin-top:4px;color:var(--muted);font-size:13px;font-weight:700}
+.dz-replace{padding:10px 16px;background:transparent;border:1.5px solid var(--line);border-radius:var(--radius-sm);color:var(--wine);font-size:13.5px;font-weight:850;transition:.25s}
+.dz-replace:hover{border-color:var(--wine)}
+
+.s2-actions{display:flex;flex-direction:column;gap:16px;padding:0 30px 28px}
+.s2-nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.submit-btn{width:100%}
+.submit-btn.ready{animation:readyGlow 1.6s ease 2}
+@keyframes readyGlow{0%,100%{box-shadow:var(--shadow-wine)}50%{box-shadow:0 0 0 8px rgba(189,89,59,.18),var(--shadow-wine)}}
+
+/* success banner */
+.success-banner{display:none;margin:0 30px 24px;padding:22px;background:linear-gradient(145deg,#633842,#3d242c);border-radius:var(--radius-md);color:#fff;align-items:center;gap:16px;box-shadow:var(--shadow-wine)}
+.success-banner.show{display:flex;animation:panelIn .5s var(--ease)}
+.sb-seal{width:52px;height:52px;flex-shrink:0;border-radius:50%;background:rgba(233,197,173,.15);border:1px solid rgba(233,197,173,.4);display:grid;place-items:center;color:#e9c5ad}
+.sb-seal svg{width:26px;height:26px}
+.success-banner strong{display:block;font-size:17px;font-weight:950}
+.success-banner small{display:block;margin-top:5px;color:#e4cdd0;font-size:14px;font-weight:650;line-height:1.9}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;z-index:300;background:rgba(28,22,24,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{position:relative;width:min(100%,560px);max-height:88vh;overflow-y:auto;background:var(--surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-deep);padding:38px 34px;text-align:center;animation:modalIn .5s var(--ease)}
+@keyframes modalIn{from{opacity:0;transform:translateY(26px) scale(.96)}to{opacity:1;transform:none}}
+.modal:before{content:"";position:absolute;top:0;right:0;width:4px;height:100%;background:var(--rust-light)}
+.modal-seal{width:88px;height:88px;margin:0 auto 20px;position:relative}
+.modal-seal svg{width:88px;height:88px}
+.modal-seal .ring{stroke-dasharray:264;stroke-dashoffset:264;animation:draw 0.8s .2s var(--ease) forwards}
+.modal-seal .check{stroke-dasharray:60;stroke-dashoffset:60;animation:draw .5s .8s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.modal h3{font-size:23px;font-weight:1000;color:var(--wine);letter-spacing:-.5px}
+.modal-statement{margin-top:18px;padding:20px;background:#fff;border:1px solid #e4ddd3;border-radius:var(--radius-md);color:var(--ink);font-size:16.5px;line-height:2.2;font-weight:650;text-align:right}
+.modal-statement strong{color:var(--wine);font-weight:950;background:linear-gradient(180deg,transparent 62%,rgba(189,89,59,.22) 62%)}
+.modal-desc{margin-top:14px;color:var(--ink-2);font-size:15px;line-height:2;font-weight:650}
+.modal-actions{display:flex;gap:12px;margin-top:24px}
+.modal-actions .btn-primary{flex:1}
+.modal-actions .btn-ghost{flex:1;justify-content:center}
+
+/* ── TOAST ── */
+.toast{position:fixed;z-index:400;left:50%;bottom:112px;transform:translate(-50%,15px);width:max-content;max-width:calc(100% - 35px);padding:13px 18px;color:#fff;background:#30272a;border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-sm);box-shadow:0 12px 30px rgba(0,0,0,.2);font-size:14px;font-weight:800;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ── FOOTER / NAV ── */
+.footer{padding:27px 0 20px;border-top:1px solid var(--line);margin-top:50px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.footer-brand{display:flex;align-items:center;gap:12px}
+.footer-brand-mark{width:42px;height:42px;display:grid;place-items:center;background:var(--surface);border-radius:var(--radius-sm);border:1px solid rgba(84,44,53,.08);overflow:hidden;box-shadow:var(--shadow-sm)}
+.footer-brand-mark img{width:100%;height:100%;object-fit:contain;padding:4px}
+.footer-brand strong{font-size:17px;font-weight:950;color:var(--wine)}
+.footer-brand small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.footer-copy{color:#93877c;font-size:11px;font-weight:700}
+.bottom-nav-wrap{position:fixed;z-index:100;bottom:calc(12px + env(safe-area-inset-bottom));left:0;right:0;display:flex;justify-content:center;padding:0 15px;pointer-events:none}
+.bottom-nav{pointer-events:auto;width:min(100%,570px);min-height:76px;display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:7px;background:rgba(31,30,31,.97);border:1px solid rgba(255,255,255,.13);border-radius:15px 15px 4px 15px;box-shadow:0 17px 48px rgba(24,20,20,.28);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.nav-item{min-width:0;min-height:61px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;position:relative;border:0;background:transparent;color:#b9b1aa;border-radius:10px;transition:background .25s,color .25s,transform .25s}
+.nav-item svg{width:23px;height:23px;stroke-width:1.8;transition:transform .25s}
+.nav-item span{font-size:11px;font-weight:850;white-space:nowrap}
+.nav-item:active{transform:scale(.94)}
+.nav-item.active{color:#fff;background:rgba(255,255,255,.10)}
+.nav-item.active:before{content:"";position:absolute;top:0;width:24px;height:2px;background:var(--rust-light);border-radius:0 0 5px 5px}
+.nav-item.active svg{color:#e99a73;transform:translateY(-2px)}
+.nav-item.action-nav{color:#f0b08a}
+.nav-item.action-nav svg{color:#e99a73}
+.nav-item.action-nav.active{background:rgba(189,89,59,.18)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+
+@media(min-width:900px){body{padding-bottom:35px}.bottom-nav-wrap{display:none}}
+@media(max-width:899px){.wrap{width:min(calc(100% - 38px),650px)}}
+@media(max-width:600px){
+  .wrap{width:calc(100% - 34px)}
+  .hero{padding:46px 0 30px}
+  .hero h1{font-size:clamp(38px,10.5vw,54px);letter-spacing:-2px;line-height:1.42}
+  .hero-text{font-size:16.5px}
+  .docs{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr}
+  .form-card-head,.fgroup-head,.fgroup-body,.form-actions,.s2-intro,.bank-wrap,.upload-zone,.s2-actions{padding-left:20px;padding-right:20px}
+  .notice,.success-banner{margin-left:20px;margin-right:20px}
+  .bc-number{gap:10px;letter-spacing:1px}
+  .form-actions{flex-direction:column-reverse}
+  .form-actions .btn-primary{width:100%}
+  .modal{padding:30px 22px}
+  .modal-actions{flex-direction:column}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:370px){.wrap{width:calc(100% - 28px)}.bottom-nav-wrap{padding:0 9px}.bottom-nav{min-height:70px}.nav-item{min-height:56px}.nav-item span{font-size:10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="guilloche" fill="none" stroke="currentColor" stroke-width="0.7">
+      <ellipse cx="100" cy="100" rx="86" ry="30"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" transform="rotate(15 100 100)"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" transform="rotate(30 100 100)"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" transform="rotate(45 100 100)"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" transform="rotate(60 100 100)"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" transform="rotate(75 100 100)"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" transform="rotate(90 100 100)"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" transform="rotate(105 100 100)"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" transform="rotate(120 100 100)"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" transform="rotate(135 100 100)"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" transform="rotate(150 100 100)"/>
+      <ellipse cx="100" cy="100" rx="86" ry="30" transform="rotate(165 100 100)"/>
+      <circle cx="100" cy="100" r="58" stroke-width="0.5"/>
+      <circle cx="100" cy="100" r="20" stroke-width="0.5"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="site-bg"><div class="bg-glow a"></div><div class="bg-glow b"></div></div>
+<div class="page-gridline"></div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero wrap">
+  <div class="eyebrow">مسیر ثبت درخواست</div>
+  <h1>
+    <span class="line"><span>ثبت درخواست،</span></span>
+    <span class="line"><span class="accent">قدم‌به‌قدم</span> و شفاف.</span>
+  </h1>
+  <p class="hero-text">
+    برای ثبت درخواست مطمئن شوید <strong>مدارک زیر را در دسترس دارید</strong>، سپس اقدام کنید:
+  </p>
+
+  <div class="docs">
+    <article class="doc-card reveal">
+      <div class="doc-num">۱</div>
+      <div>
+        <h3>کارت ملی جدید یا شناسنامه جدید</h3>
+        <p>مدرک هویتی معتبر و خوانا، جهت احراز هویت متقاضی.</p>
+      </div>
+    </article>
+    <article class="doc-card reveal">
+      <div class="doc-num">۲</div>
+      <div>
+        <h3>مدارک احراز محل سکونت</h3>
+        <p>شامل: <strong>مبایعه‌نامه</strong> یا <strong>قولنامه</strong> یا <strong>اجاره‌نامه</strong> یا <strong>سند تک‌برگ</strong> و <strong>کد پستی محل سکونت</strong>.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-zone wrap reveal">
+  <div class="tl-head">
+    <div>
+      <div class="section-kicker">REQUEST ROADMAP / 05</div>
+      <h2>مسیر پنج‌مرحله‌ای درخواست</h2>
+    </div>
+  </div>
+  <div class="tl-scroll">
+    <div class="timeline" id="timeline">
+      <div class="tl-track"><div class="tl-fill" id="tlFill"></div></div>
+
+      <button class="tl-step active clickable" data-step="1">
+        <div class="tl-node">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        </div>
+        <small>STEP / 01</small>
+        <span>فرم اطلاعات هویتی و تماس</span>
+      </button>
+
+      <button class="tl-step pending" data-step="2">
+        <div class="tl-node">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <small>STEP / 02</small>
+        <span>اعتبارسنجی گرید بانکی A B C D</span>
+      </button>
+
+      <div class="tl-step pending" data-step="3">
+        <div class="tl-node">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h8l4 4v14H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M15 3v5h5M12 12v6M9 15l3-3 3 3"/></svg>
+        </div>
+        <small>STEP / 03</small>
+        <span>بارگذاری مدارک هویتی و سکونت</span>
+      </div>
+
+      <div class="tl-step pending" data-step="4">
+        <div class="tl-node">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6 16 16.5 5.5a2.1 2.1 0 0 1 3 3L9 19l-4 1z"/></svg>
+        </div>
+        <small>STEP / 04</small>
+        <span>امضای قرارداد</span>
+      </div>
+
+      <div class="tl-step pending" data-step="5">
+        <div class="tl-node">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.2 2.1 3-.2.8 2.9 2.5 1.7-1.1 2.8 1.1 2.8-2.5 1.7-.8 2.9-3-.2L12 22l-2.2-2.1-3 .2-.8-2.9-2.5-1.7 1.1-2.8-1.1-2.8L6 8.2l.8-2.9 3 .2L12 3z"/><path d="M8.5 12.3l2.2 2.2 4.8-5"/></svg>
+        </div>
+        <small>STEP / 05</small>
+        <span>تایید سفته الکترونیک</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-zone wrap" id="formZone">
+
+  <!-- STEP 1 -->
+  <div class="step-panel active" id="panel1">
+    <div class="form-card">
+      <div class="form-card-head">
+        <div>
+          <div class="section-kicker">IDENTITY &amp; CONTACT / 01</div>
+          <h2>فرم اطلاعات هویتی و تماس</h2>
+        </div>
+        <span class="fch-code">FORM / 01</span>
+      </div>
+
+      <!-- group 1 -->
+      <div class="fgroup open" data-group="g1">
+        <button class="fgroup-head" aria-expanded="true">
+          <span class="fg-num">۰۱</span>
+          <h3>اطلاعات هویتی</h3>
+          <span class="fg-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="collapse open"><div class="collapse-inner">
+          <div class="fgroup-body">
+            <div class="fgrid">
+              <div class="field" data-field="fname">
+                <label for="fname">نام</label>
+                <div class="control">
+                  <input id="fname" type="text" placeholder="نام خود را وارد کنید" autocomplete="given-name">
+                  <svg class="field-status ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>
+                  <svg class="field-status bad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>
+                </div>
+                <span class="field-msg">نام را وارد کنید.</span>
+              </div>
+              <div class="field" data-field="lname">
+                <label for="lname">نام خانوادگی</label>
+                <div class="control">
+                  <input id="lname" type="text" placeholder="نام خانوادگی خود را وارد کنید" autocomplete="family-name">
+                  <svg class="field-status ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>
+                  <svg class="field-status bad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>
+                </div>
+                <span class="field-msg">نام خانوادگی را وارد کنید.</span>
+              </div>
+
+              <div class="field full" data-field="nationality">
+                <label>تابعیت</label>
+                <div class="csel" id="natSel">
+                  <button class="csel-btn" id="natBtn" aria-expanded="false" aria-haspopup="listbox">
+                    <span id="natValue">ایرانی</span>
+                    <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+                  </button>
+                  <div class="collapse csel-menu" id="natMenu"><div class="collapse-inner">
+                    <div class="csel-list" role="listbox">
+                      <button class="csel-opt selected" data-val="iranian" role="option"><span class="radio"></span>ایرانی</button>
+                      <button class="csel-opt" data-val="foreign" role="option"><span class="radio"></span>اتباع</button>
+                    </div>
+                  </div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- notice for foreign -->
+      <div class="collapse" id="foreignNotice"><div class="collapse-inner">
+        <div class="notice" style="padding:18px 0 24px">
+          <div class="notice-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>
+            <div>
+              <p>در حال حاضر امکان ارائه وام به اتباع محترم وجود ندارد.</p>
+              <small>از همراهی و اعتماد شما سپاسگزاریم.</small>
+            </div>
+          </div>
+        </div>
+      </div></div>
+
+      <!-- rest of form -->
+      <div class="collapse open" id="restWrap"><div class="collapse-inner">
+
+        <div class="fgroup open" data-group="g1b" style="border-top:0">
+          <div class="fgroup-body" style="padding-top:0">
+            <div class="fgrid">
+              <div class="field full" data-field="nid">
+                <label for="nid">کد ملی</label>
+                <div class="control">
+                  <input id="nid" type="text" inputmode="numeric" maxlength="10" placeholder="کد ملی خود را وارد کنید" autocomplete="off">
+                  <svg class="field-status ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>
+                  <svg class="field-status bad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>
+                </div>
+                <span class="field-msg">کد ملی وارد شده معتبر نیست.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- group 2 -->
+        <div class="fgroup open" data-group="g2">
+          <button class="fgroup-head" aria-expanded="true">
+            <span class="fg-num">۰۲</span>
+            <h3>اطلاعات تماس</h3>
+            <span class="fg-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+          </button>
+          <div class="collapse open"><div class="collapse-inner">
+            <div class="fgroup-body">
+              <div class="fgrid">
+                <div class="field full" data-field="mobile">
+                  <label for="mobile">شماره تماس</label>
+                  <div class="field-note">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M12 9v4M12 16h.01"/></svg>
+                    شماره تماس باید حتماً متعلق به وام‌گیرنده باشد.
+                  </div>
+                  <div class="control">
+                    <input id="mobile" type="tel" inputmode="numeric" maxlength="11" placeholder="شماره تماس خود را وارد کنید" autocomplete="tel">
+                    <svg class="field-status ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>
+                    <svg class="field-status bad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>
+                  </div>
+                  <span class="field-msg">شماره تماس وارد شده معتبر نیست.</span>
+                </div>
+                <div class="field full" data-field="phone">
+                  <label for="phone">شماره تماس ثابت <span class="opt">(اختیاری)</span></label>
+                  <div class="control">
+                    <input id="phone" type="tel" inputmode="numeric" maxlength="11" placeholder="شماره ثابت را وارد کنید" autocomplete="off">
+                    <svg class="field-status ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>
+                    <svg class="field-status bad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5h.01"/></svg>
+                  </div>
+                  <span class="field-msg">شماره ثابت وارد شده معتبر نیست.</span>
+                </div>
+              </div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- group 3 -->
+        <div class="fgroup open" data-group="g3">
+          <button class="fgroup-head" aria-expanded="true">
+            <span class="fg-num">۰۳</span>
+            <h3>آدرس محل سکونت</h3>
+            <span class="fg-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+          </button>
+          <div class="collapse open"><div class="collapse-inner">
+            <div class="fgroup-body">
+              <div class="field full" data-field="address">
+                <div class="field-note big">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/></svg>
+                  <span>آدرسی را وارد کنید که با <em>مدارک احراز سکونتی که بارگذاری می‌کنید</em> مطابقت داشته باشد.</span>
+                </div>
+                <label for="address">آدرس محل سکونت</label>
+                <div class="control">
+                  <textarea id="address" placeholder="آدرس کامل محل سکونت خود را وارد کنید"></textarea>
+                </div>
+                <span class="field-msg">آدرس محل سکونت را کامل وارد کنید.</span>
+              </div>
+            </div>
+          </div></div>
+        </div>
+
+        <div class="form-actions">
+          <span></span>
+          <button class="btn-primary" id="toStep2">
+            <span>صفحه بعد</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          </button>
+        </div>
+
+      </div></div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-panel" id="panel2">
+    <div class="form-card">
+      <div class="form-card-head">
+        <div>
+          <div class="section-kicker">CREDIT CHECK / 02</div>
+          <h2>اعتبارسنجی گرید بانکی</h2>
+        </div>
+        <span class="fch-code">FORM / 02</span>
+      </div>
+
+      <div class="s2-intro">
+        <p>در این بخش باید جهت بررسی رتبه اعتباری مبلغ <strong>۸۹ هزار تومان</strong> به شماره کارت اعلام شده پرداخت نمایید و رسید آن را بارگذاری کنید.</p>
+      </div>
+
+      <div class="bank-wrap">
+        <div class="bank-card" id="bankCard">
+          <svg class="guilloche" viewBox="0 0 200 200" aria-hidden="true"><use href="#guilloche"/></svg>
+          <div class="bc-top">
+            <div class="bc-bank">
+              <span class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.2 2.1 3-.2.8 2.9 2.5 1.7-1.1 2.8 1.1 2.8-2.5 1.7-.8 2.9-3-.2L12 22l-2.2-2.1-3 .2-.8-2.9-2.5-1.7 1.1-2.8-1.1-2.8L6 8.2l.8-2.9 3 .2L12 3z"/><path d="M8.5 12.3l2.2 2.2 4.8-5"/></svg></span>
+              بانک قرض الحسنه رسالت
+            </div>
+            <span class="bc-tag">DESTINATION CARD</span>
+          </div>
+          <div class="bc-chip">
+            <span class="chip"></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 8.5a8 8 0 0 1 0 7M9.5 6.5a11.5 11.5 0 0 1 0 11M13 4.5a15 15 0 0 1 0 15"/></svg>
+          </div>
+          <div class="bc-number"><span>۵۰۴۱</span><span>۷۲۱۰</span><span>۷۰۷۹</span><span>۳۰۷۱</span></div>
+          <div class="bc-bottom">
+            <div class="bc-owner">
+              <small>به نام</small>
+              <strong>حمیدرضا سلیمی</strong>
+            </div>
+            <button class="bc-copy" id="copyCard">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+              کپی شماره کارت
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="upload-zone">
+        <div class="upload-label">لطفا رسید واریز وجه را ارسال نمایید</div>
+        <div class="dropzone" id="dropzone">
+          <input type="file" id="fileInput" hidden>
+          <div class="dz-idle">
+            <div class="dz-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0 4 4m-4-4-4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg></div>
+            <p class="dz-desc">لطفا تصویر پیامک یا رسید واریز وجه دارای تاریخ و ساعت و کد رهگیری خوانا ارسال کنید</p>
+            <button class="dz-btn" id="pickFile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m5 17 4.5-4.5 3 3L16 12l3 3"/></svg>
+              انتخاب تصویر رسید
+            </button>
+          </div>
+          <div class="dz-progress">
+            <div class="dz-file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h8l4 4v14H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M15 3v5h5"/></svg><span id="fileName">رسید واریز</span></div>
+            <div class="dz-bar"><div class="dz-bar-fill" id="dzFill"></div></div>
+            <div class="dz-pct" id="dzPct">۰٪</div>
+            <div class="dz-status">در حال بارگذاری رسید…</div>
+          </div>
+          <div class="dz-done">
+            <div class="dz-thumb" id="dzThumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m5 17 4.5-4.5 3 3L16 12l3 3"/></svg></div>
+            <div class="dz-done-text">
+              <strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>رسید با موفقیت بارگذاری شد</strong>
+              <small id="dzDoneName">رسید واریز</small>
+            </div>
+            <button class="dz-replace" id="replaceFile">انتخاب مجدد</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="success-banner" id="successBanner">
+        <div class="sb-seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></div>
+        <div>
+          <strong>درخواست بررسی اعتبارسنجی شما با موفقیت ثبت شد.</strong>
+          <small>پس از بررسی رتبه اعتباری شما میتوانید ادامه فرم را تکمیل و درخواست وام خود را ثبت نمایید</small>
+        </div>
+      </div>
+
+      <div class="s2-actions">
+        <button class="btn-primary submit-btn" id="submitBtn" disabled>
+          <span>ثبت و ارسال</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>
+        </button>
+        <div class="s2-nav">
+          <button class="btn-ghost" id="backTo1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            صفحه قبل
+          </button>
+          <button class="btn-ghost off" disabled>
+            صفحه بعد
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer wrap">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-mark"><img src="icon.png" alt="انجمن سهراب"></div>
+      <div>
+        <strong>وام شخصی سهراب</strong>
+        <small>انجمن خصوصی سهراب</small>
+      </div>
+    </div>
+    <div class="footer-copy">© تمامی حقوق این سامانه محفوظ است.</div>
+  </div>
+</footer>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav-wrap">
+  <nav class="bottom-nav" aria-label="ناوبری اصلی">
+    <a class="nav-item" href="index.html" data-nav="home" aria-label="صفحه اصلی">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9M9 20v-7h6v7"/></svg>
+      <span>صفحه اصلی</span>
+    </a>
+    <a class="nav-item" href="guide.html" data-nav="guide" aria-label="راهنما">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v17H7.5A2.5 2.5 0 0 0 5 21.5z"/><path d="M5 4.5v17M9 7h7M9 11h7"/></svg>
+      <span>راهنما</span>
+    </a>
+    <a class="nav-item action-nav active" href="activation.html" data-nav="request" aria-label="درخواست">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg>
+      <span>درخواست</span>
+    </a>
+    <a class="nav-item" href="installments.html" data-nav="installments" aria-label="اقساط">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 10h18M8 15h3m4 0h2"/><path d="M7 2v3m10-3v3"/></svg>
+      <span>اقساط</span>
+    </a>
+  </nav>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-seal">
+      <svg viewBox="0 0 88 88" fill="none">
+        <circle class="ring" cx="44" cy="44" r="42" stroke="#bd593b" stroke-width="2.5"/>
+        <path class="check" d="M28 45l11 11 21-24" stroke="#542c35" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h3 id="modalTitle">درخواست شما آماده ثبت است</h3>
+    <div class="modal-statement" id="modalStatement"></div>
+    <p class="modal-desc">پس از بررسی رتبه اعتباری شما میتوانید ادامه فرم را تکمیل و درخواست وام خود را ثبت نمایید</p>
+    <div class="modal-actions">
+      <button class="btn-primary" id="confirmBtn"><span>تایید</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></button>
+      <button class="btn-ghost" id="editBtn">ویرایش فرم</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  "use strict";
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+  const $ = s => document.querySelector(s);
+  const faDigits = "۰۱۲۳۴۵۶۷۸۹";
+  const toFa = s => String(s).replace(/\d/g, d => faDigits[d]);
+  const toEn = s => String(s).replace(/[۰-۹]/g, d => faDigits.indexOf(d)).replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+
+  /* toast */
+  const toast = $("#toast"); let toastT;
+  function showToast(m){ toast.textContent = m; toast.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(()=>toast.classList.remove("show"), 2600); }
+
+  /* intro + reveal */
+  if (window.gsap && !reducedMotion) {
+    gsap.timeline({defaults:{ease:"power3.out"}})
+      .from(".hero .eyebrow",{y:15,opacity:0,duration:.55})
+      .from(".hero h1 .line span",{y:48,opacity:0,duration:.85,stagger:.13},"-=.2")
+      .from(".hero-text",{y:18,opacity:0,duration:.6},"-=.4")
+      .from(".doc-card",{y:22,opacity:0,duration:.6,stagger:.12},"-=.3");
+  }
+  const io = new IntersectionObserver((es,obs)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target);}});},{threshold:.08,rootMargin:"0px 0px -30px 0px"});
+  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+  /* accordion groups */
+  document.querySelectorAll(".fgroup-head").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const g = btn.closest(".fgroup");
+      const body = g.querySelector(".collapse");
+      const open = g.classList.toggle("open");
+      body.classList.toggle("open", open);
+      btn.setAttribute("aria-expanded", open);
+    });
+  });
+
+  /* nationality select */
+  const natSel=$("#natSel"), natBtn=$("#natBtn"), natMenu=$("#natMenu"), natValue=$("#natValue");
+  const restWrap=$("#restWrap"), foreignNotice=$("#foreignNotice");
+  let nationality="iranian";
+  natBtn.addEventListener("click",e=>{e.stopPropagation();const o=natSel.classList.toggle("open");natMenu.classList.toggle("open",o);natBtn.setAttribute("aria-expanded",o);});
+  document.addEventListener("click",e=>{if(!natSel.contains(e.target)){natSel.classList.remove("open");natMenu.classList.remove("open");natBtn.setAttribute("aria-expanded","false");}});
+  document.querySelectorAll(".csel-opt").forEach(opt=>{
+    opt.addEventListener("click",()=>{
+      document.querySelectorAll(".csel-opt").forEach(o=>o.classList.remove("selected"));
+      opt.classList.add("selected");
+      nationality=opt.dataset.val;
+      natValue.textContent=opt.textContent.trim();
+      natSel.classList.remove("open");natMenu.classList.remove("open");natBtn.setAttribute("aria-expanded","false");
+      const foreign = nationality==="foreign";
+      restWrap.classList.toggle("open",!foreign);
+      foreignNotice.classList.toggle("open",foreign);
+    });
+  });
+
+  /* field helpers */
+  const fields={
+    fname:{el:$("#fname"),test:v=>v.trim().length>=2},
+    lname:{el:$("#lname"),test:v=>v.trim().length>=2},
+    nid:{el:$("#nid"),test:v=>{v=toEn(v);if(!/^\d{10}$/.test(v)||/^(\d)\1{9}$/.test(v))return false;let s=0;for(let i=0;i<9;i++)s+=+v[i]*(10-i);const r=s%11,c=+v[9];return r<2?c===r:c===11-r;}},
+    mobile:{el:$("#mobile"),test:v=>/^09\d{9}$/.test(toEn(v))},
+    phone:{el:$("#phone"),test:v=>v.trim()===""||/^0\d{10}$/.test(toEn(v))},
+    address:{el:$("#address"),test:v=>v.trim().length>=10}
+  };
+  function setState(key,ok){
+    const wrap=fields[key].el.closest(".field");
+    wrap.classList.toggle("valid",ok);
+    wrap.classList.toggle("error",!ok);
+  }
+  function clearState(key){const w=fields[key].el.closest(".field");w.classList.remove("valid","error");}
+  ["nid","mobile","phone"].forEach(k=>{
+    fields[k].el.addEventListener("input",e=>{
+      e.target.value=toEn(e.target.value).replace(/\D/g,"").slice(0,+e.target.maxLength||11);
+      if(e.target.closest(".field").classList.contains("error")) setState(k,fields[k].test(e.target.value));
+    });
+  });
+  ["fname","lname","address"].forEach(k=>{
+    fields[k].el.addEventListener("input",e=>{if(e.target.closest(".field").classList.contains("error"))setState(k,fields[k].test(e.target.value));});
+    fields[k].el.addEventListener("blur",e=>{if(e.target.value.trim())setState(k,fields[k].test(e.target.value));});
+  });
+  ["nid","mobile"].forEach(k=>fields[k].el.addEventListener("blur",e=>{if(e.target.value.trim())setState(k,fields[k].test(e.target.value));}));
+
+  /* timeline + steps */
+  let current=1, maxReached=1, confirmed=false;
+  const tlSteps=[...document.querySelectorAll(".tl-step")];
+  const tlFill=$("#tlFill");
+  function renderTimeline(){
+    tlSteps.forEach(st=>{
+      const n=+st.dataset.step;
+      st.classList.remove("active","done","clickable");
+      if(n<current||(n===2&&confirmed)) st.classList.add("done");
+      else if(n===current) st.classList.add("active");
+      if(n<=maxReached&&n<=2) st.classList.add("clickable");
+    });
+    const completed=(current-1)+(confirmed?1:0);
+    tlFill.style.width=(completed/4*100)+"%";
+  }
+  function goStep(n){
+    current=n; maxReached=Math.max(maxReached,n);
+    $("#panel1").classList.toggle("active",n===1);
+    $("#panel2").classList.toggle("active",n===2);
+    renderTimeline();
+    $("#formZone").scrollIntoView({behavior:reducedMotion?"auto":"smooth",block:"start"});
+  }
+  tlSteps.forEach(st=>{
+    st.addEventListener("click",()=>{
+      const n=+st.dataset.step;
+      if(n<=maxReached&&n<=2&&n!==current) goStep(n);
+    });
+  });
+
+  /* next from step1 */
+  $("#toStep2").addEventListener("click",()=>{
+    if(nationality==="foreign") return;
+    const order=["fname","lname","nid","mobile","phone","address"];
+    let firstBad=null;
+    order.forEach(k=>{const ok=fields[k].test(fields[k].el.value);setState(k,ok);if(!ok&&!firstBad)firstBad=k;});
+    if(firstBad){
+      const wrap=fields[firstBad].el.closest(".fgroup");
+      if(wrap){wrap.classList.add("open");wrap.querySelector(".collapse").classList.add("open");}
+      fields[firstBad].el.focus({preventScroll:true});
+      fields[firstBad].el.scrollIntoView({behavior:reducedMotion?"auto":"smooth",block:"center"});
+      showToast("لطفاً اطلاعات فرم را کامل و صحیح وارد کنید.");
+      return;
+    }
+    goStep(2);
+  });
+  $("#backTo1").addEventListener("click",()=>goStep(1));
+
+  /* copy card */
+  $("#copyCard").addEventListener("click",()=>{
+    const num="5041721070793071";
+    const done=()=>showToast("شماره کارت کپی شد.");
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(num).then(done).catch(()=>fallback());}
+    else fallback();
+    function fallback(){const t=document.createElement("textarea");t.value=num;document.body.appendChild(t);t.select();try{document.execCommand("copy");done();}catch(e){}t.remove();}
+  });
+
+  /* upload */
+  const dz=$("#dropzone"), fileInput=$("#fileInput"), dzFill=$("#dzFill"), dzPct=$("#dzPct");
+  const submitBtn=$("#submitBtn");
+  let uploaded=false, progRaf=null;
+  $("#pickFile").addEventListener("click",e=>{e.stopPropagation();fileInput.click();});
+  $("#replaceFile").addEventListener("click",e=>{e.stopPropagation();fileInput.click();});
+  dz.addEventListener("click",()=>{if(!dz.classList.contains("uploading"))fileInput.click();});
+  ["dragover","dragenter"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add("drag");}));
+  ["dragleave","drop"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove("drag");}));
+  dz.addEventListener("drop",e=>{const f=e.dataTransfer.files&&e.dataTransfer.files[0];if(f)startUpload(f);});
+  fileInput.addEventListener("change",()=>{const f=fileInput.files&&fileInput.files[0];if(f)startUpload(f);});
+
+  function startUpload(file){
+    uploaded=false;submitBtn.disabled=true;submitBtn.classList.remove("ready");
+    $("#successBanner").classList.remove("show");
+    $("#fileName").textContent=file.name;
+    $("#dzDoneName").textContent=file.name;
+    const thumb=$("#dzThumb");
+    if(file.type&&file.type.startsWith("image/")){
+      const url=URL.createObjectURL(file);
+      thumb.innerHTML='<img alt="پیش‌نمایش رسید">';
+      thumb.querySelector("img").src=url;
+    } else {
+      thumb.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h8l4 4v14H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M15 3v5h5"/></svg>';
+    }
+    dz.classList.remove("done");dz.classList.add("uploading");
+    let p=0;
+    cancelAnimationFrame(progRaf);
+    const tick=()=>{
+      p+=(100-p)*0.055+0.35;
+      if(p>=99.4){p=100;finish();}
+      else progRaf=requestAnimationFrame(tick);
+      dzFill.style.width=p+"%";
+      dzPct.textContent=toFa(Math.round(p))+"٪";
+    };
+    const finish=()=>{
+      dzFill.style.width="100%";dzPct.textContent="۱۰۰٪";
+      setTimeout(()=>{
+        dz.classList.remove("uploading");dz.classList.add("done");
+        uploaded=true;submitBtn.disabled=false;submitBtn.classList.add("ready");
+      },350);
+    };
+    progRaf=requestAnimationFrame(tick);
+  }
+
+  /* submit + modal */
+  const overlay=$("#modalOverlay");
+  submitBtn.addEventListener("click",()=>{
+    if(!uploaded)return;
+    const name=(fields.fname.el.value.trim()+" "+fields.lname.el.value.trim()).trim();
+    const nid=toFa(toEn(fields.nid.el.value));
+    const mob=toFa(toEn(fields.mobile.el.value));
+    $("#modalStatement").innerHTML=
+      'اینجانب <strong>'+name+'</strong> به کد ملی <strong>'+nid+'</strong> شماره تماس <strong>'+mob+'</strong> درخواست بررسی اعتبارسنجی بانکی را جهت دریافت وام دارم.';
+    overlay.classList.add("show");
+    document.body.style.overflow="hidden";
+  });
+  function closeModal(){overlay.classList.remove("show");document.body.style.overflow="";}
+  $("#confirmBtn").addEventListener("click",()=>{
+    closeModal();confirmed=true;renderTimeline();
+    $("#successBanner").classList.add("show");
+    submitBtn.disabled=true;submitBtn.classList.remove("ready");
+    submitBtn.querySelector("span").textContent="ثبت شد";
+    showToast("درخواست شما با موفقیت ثبت شد.");
+    $("#successBanner").scrollIntoView({behavior:reducedMotion?"auto":"smooth",block:"center"});
+  });
+  $("#editBtn").addEventListener("click",()=>{closeModal();goStep(1);});
+  overlay.addEventListener("click",e=>{if(e.target===overlay)closeModal();});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&overlay.classList.contains("show"))closeModal();});
+
+  /* bank card tilt */
+  const bank=$("#bankCard");
+  if(finePointer&&!reducedMotion){
+    bank.addEventListener("pointermove",e=>{
+      const r=bank.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      bank.style.transform=`perspective(1000px) rotateY(${x*-4}deg) rotateX(${y*4}deg)`;
+    });
+    bank.addEventListener("pointerleave",()=>{bank.style.transform="perspective(1000px) rotateY(0) rotateX(0)";});
+  }
+
+  /* touch feedback */
+  document.querySelectorAll(".btn-primary,.btn-ghost,.nav-item,.dz-btn,.bc-copy").forEach(el=>{
+    el.addEventListener("pointerdown",()=>{if(!reducedMotion&&window.gsap)gsap.to(el,{scale:.96,duration:.12,overwrite:true});});
+    el.addEventListener("pointerup",()=>{if(!reducedMotion&&window.gsap)gsap.to(el,{scale:1,duration:.25,ease:"back.out(2)",overwrite:true});});
+    el.addEventListener("pointercancel",()=>{if(!reducedMotion&&window.gsap)gsap.to(el,{scale:1,duration:.2});});
+  });
+
+  renderTimeline();
+})();
+</script>
+
+</body>
+  </html>
